@@ -1,9 +1,22 @@
 package Utilidades;
 
 import Dominio.Administrador;
+import Dominio.Juego.CartonLleno;
+import Dominio.Juego.Diagonal;
+import Dominio.Juego.Figura;
+import Dominio.Juego.Linea;
+import Dominio.Juego.Perimetro;
 import Dominio.Usuarios.Jugador;
 
 public class Precarga {
+    
+    /*FIGURAS*/
+    Linea linea = new Linea("Línea");
+    Diagonal diagonal = new Diagonal("Diagonal");
+    Perimetro perimetro = new Perimetro("Perímetro");
+    CartonLleno cartonLleno = new CartonLleno("Cartón Lleno");
+    
+    
     
     /*CONFIGURACION*/
     Configuracion config = new Configuracion(3, 3, 3, 3, 100, null); //falta la lista de figuras.

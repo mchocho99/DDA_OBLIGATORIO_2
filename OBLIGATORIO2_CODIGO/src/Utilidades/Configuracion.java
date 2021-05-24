@@ -1,5 +1,6 @@
 package Utilidades;
 
+import Dominio.Juego.Figura;
 import java.util.List;
 
 public class Configuracion {

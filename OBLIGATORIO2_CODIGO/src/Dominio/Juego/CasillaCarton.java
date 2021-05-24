@@ -1,5 +1,7 @@
 package Dominio.Juego;
 
+import java.util.List;
+
 public class CasillaCarton {
     private int numero;
     private boolean marcado;
@@ -24,8 +26,7 @@ public class CasillaCarton {
     public void setMarcado(boolean marcado) {
         this.marcado = marcado;
     }
-    
-    
+   
     public boolean estaOcupado() {
         return this.numero == -1;
     }

@@ -10,4 +10,6 @@ public abstract class Figura {
     public String getNombre() {
         return nombre;
     }
+    
+    public abstract boolean completo(CasillaCarton[][] matrizCarton, int filas, int columnas);
 }
