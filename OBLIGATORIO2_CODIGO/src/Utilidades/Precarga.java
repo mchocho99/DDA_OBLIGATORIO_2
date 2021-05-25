@@ -1,12 +1,13 @@
 package Utilidades;
 
-import Dominio.Administrador;
+import Dominio.Usuarios.Administrador;
 import Dominio.Juego.CartonLleno;
 import Dominio.Juego.Diagonal;
 import Dominio.Juego.Figura;
 import Dominio.Juego.Linea;
 import Dominio.Juego.Perimetro;
 import Dominio.Usuarios.Jugador;
+import java.util.ArrayList;
 
 public class Precarga {
     
@@ -15,8 +16,12 @@ public class Precarga {
     Diagonal diagonal = new Diagonal("Diagonal");
     Perimetro perimetro = new Perimetro("Perímetro");
     CartonLleno cartonLleno = new CartonLleno("Cartón Lleno");
-    
-    
+    Figura[] figuras = new Figura[4];
+    public Precarga() {
+        figuras[0] = linea;
+    }
+    //prueba.
+    //figuras[1] = diagonal;
     
     /*CONFIGURACION*/
     Configuracion config = new Configuracion(3, 3, 3, 3, 100, null); //falta la lista de figuras.

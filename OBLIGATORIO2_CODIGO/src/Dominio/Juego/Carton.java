@@ -9,8 +9,8 @@ public class Carton {
     private double valor;
     private List<Figura> figuras;
 
-    public Carton(int cantNumeros, int filasCarton, int columnasCarton, double valor, List<Figura> figuras) {
-        this.cantNumeros = cantNumeros;
+    public Carton(int filasCarton, int columnasCarton, double valor, List<Figura> figuras) {
+        this.cantNumeros = filasCarton*columnasCarton;
         
         this.matrizCarton = new CasillaCarton[filasCarton][columnasCarton];
         for (int i = 0; i < matrizCarton.length; i++) {

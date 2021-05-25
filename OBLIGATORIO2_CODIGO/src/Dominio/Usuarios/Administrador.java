@@ -1,4 +1,4 @@
-package Dominio;
+package Dominio.Usuarios;
 
 import Dominio.Usuarios.Usuario;
 
