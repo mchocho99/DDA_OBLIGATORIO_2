@@ -11,6 +11,7 @@ public class Juego {
     private int numero;
     private List<Integer> numerosQueSalieron;
     private List<Integer> numerosDelJuego;
+    //AGREGAR UN ENUM CON ESTADOS DEL JUEGO, EN ESPERA O COMENZADO
     
     public Juego(int numero) {
         this.jugadores = new ArrayList<>();
