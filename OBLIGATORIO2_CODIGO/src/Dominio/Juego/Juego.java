@@ -8,9 +8,15 @@ public class Juego {
     private List<Jugador> jugadores;
     private int cantCartonesEnJuego;
     private int cantNumerosEnJuego;
+    private int numero;
+    private List<Integer> numerosQueSalieron;
+    private List<Integer> numerosDelJuego;
     
-    public Juego() {
+    public Juego(int numero) {
         this.jugadores = new ArrayList<>();
+        this.numerosQueSalieron = new ArrayList<>();
+        this.numero = numero;
+        this.numerosDelJuego = new ArrayList<>();
     }
 
     public List<Jugador> getJugadores() {
@@ -20,6 +26,7 @@ public class Juego {
     public void setJugadores(Jugador jugador) {
         if(!this.jugadores.contains(jugador)) {
             this.jugadores.add(jugador);
+            setNumerosDelJuego(jugador);
         }
     }
 
@@ -37,6 +44,28 @@ public class Juego {
 
     public void setCantNumerosEnJuego(int cantNumerosEnJuego) {
         this.cantNumerosEnJuego = cantNumerosEnJuego;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public List<Integer> getNumerosQueSalieron() {
+        return numerosQueSalieron;
+    }
+
+    public void setNumerosQueSalieron(int numero) {
+        if (!numerosQueSalieron.contains(numero)) {
+            numerosQueSalieron.add(numero);
+        }
+    }
+
+    public List<Integer> getNumerosDelJuego() {
+        return numerosDelJuego;
+    }
+
+    public void setNumerosDelJuego(Jugador jugador) {
+        //recorrer los cartones del jugador y agregar a la lista de numeros del juego
     }
     
     
