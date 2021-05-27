@@ -11,13 +11,14 @@ public class Juego {
     private int numero;
     private List<Integer> numerosQueSalieron;
     private List<Integer> numerosDelJuego;
-    //AGREGAR UN ENUM CON ESTADOS DEL JUEGO, EN ESPERA O COMENZADO
+    private EstadosJuego estado;
     
     public Juego(int numero) {
         this.jugadores = new ArrayList<>();
         this.numerosQueSalieron = new ArrayList<>();
         this.numero = numero;
         this.numerosDelJuego = new ArrayList<>();
+        this.estado = EstadosJuego.EN_ESPERA;
     }
 
     public List<Jugador> getJugadores() {
@@ -68,6 +69,15 @@ public class Juego {
     public void setNumerosDelJuego(Jugador jugador) {
         //recorrer los cartones del jugador y agregar a la lista de numeros del juego
     }
+
+    public EstadosJuego getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadosJuego estado) {
+        this.estado = estado;
+    }
+    
     
     
 }
