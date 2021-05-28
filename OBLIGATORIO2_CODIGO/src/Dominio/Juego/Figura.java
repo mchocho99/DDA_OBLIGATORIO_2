@@ -11,5 +11,5 @@ public abstract class Figura {
         return nombre;
     }
     
-    public abstract boolean completo(CasillaCarton[][] matrizCarton, int filas, int columnas);
+    public abstract boolean completo(Numero[][] matrizCarton, int filas, int columnas);
 }

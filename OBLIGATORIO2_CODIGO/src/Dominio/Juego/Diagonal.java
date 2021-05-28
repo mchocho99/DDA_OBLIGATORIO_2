@@ -7,7 +7,7 @@ public class Diagonal extends Figura {
     }
     
     @Override
-    public boolean completo(CasillaCarton[][] matrizCarton, int filas, int columnas) {
+    public boolean completo(Numero[][] matrizCarton, int filas, int columnas) {
         int largo = matrizCarton.length;
         for (int i = 0; i < largo; i++){
             for (int j = 0; j < largo; j++){

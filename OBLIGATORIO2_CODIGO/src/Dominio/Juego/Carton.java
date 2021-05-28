@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Carton {
-    private CasillaCarton[][] matrizCarton;
+    private Numero[][] matrizCarton;
     private int cantNumeros;
     private double valor;
     private List<Figura> figuras;
@@ -12,10 +12,10 @@ public class Carton {
     public Carton(int filasCarton, int columnasCarton, double valor, List<Figura> figuras) {
         this.cantNumeros = filasCarton*columnasCarton;
         
-        this.matrizCarton = new CasillaCarton[filasCarton][columnasCarton];
+        this.matrizCarton = new Numero[filasCarton][columnasCarton];
         for (int i = 0; i < matrizCarton.length; i++) {
             for (int j = 0; j < matrizCarton[i].length; j++) {
-                matrizCarton[i][j] = new CasillaCarton(-1, false);
+                matrizCarton[i][j] = new Numero(-1, false);
             }
         }
         
@@ -23,7 +23,7 @@ public class Carton {
         this.figuras = figuras;
     }
 
-    public CasillaCarton[][] getMatrizCarton() {
+    public Numero[][] getMatrizCarton() {
         return matrizCarton;
     }
 
@@ -31,7 +31,7 @@ public class Carton {
         for (int i = 0; i < matrizCarton.length; i++) {
             for (int j = 0; j < matrizCarton[i].length; j++) {
                 if(!matrizCarton[i][j].estaOcupado()) {
-                    matrizCarton[i][j] = new CasillaCarton(numero, false);
+                    matrizCarton[i][j] = new Numero(numero, false);
                 }
             }
         }

@@ -9,8 +9,8 @@ public class Juego {
     private int cantCartonesEnJuego;
     private int cantNumerosEnJuego;
     private int numero;
-    private List<Integer> numerosQueSalieron;
-    private List<Integer> numerosDelJuego;
+    private List<Numero> numerosQueSalieron;
+    private List<Numero> numerosDelJuego;
     private EstadosJuego estado;
     
     public Juego(int numero) {
@@ -52,17 +52,17 @@ public class Juego {
         return numero;
     }
 
-    public List<Integer> getNumerosQueSalieron() {
+    public List<Numero> getNumerosQueSalieron() {
         return numerosQueSalieron;
     }
 
-    public void setNumerosQueSalieron(int numero) {
+    public void setNumerosQueSalieron(Numero numero) {
         if (!numerosQueSalieron.contains(numero)) {
             numerosQueSalieron.add(numero);
         }
     }
 
-    public List<Integer> getNumerosDelJuego() {
+    public List<Numero> getNumerosDelJuego() {
         return numerosDelJuego;
     }
 

@@ -7,7 +7,7 @@ public class Linea extends Figura {
     }
     
     @Override
-    public boolean completo(CasillaCarton[][] matrizCarton, int filas, int columnas) {
+    public boolean completo(Numero[][] matrizCarton, int filas, int columnas) {
         boolean[] filaMarcada = new boolean[columnas];
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {

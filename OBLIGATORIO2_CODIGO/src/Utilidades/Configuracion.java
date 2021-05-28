@@ -9,9 +9,9 @@ public class Configuracion {
     private int maxCartones;
     private int cantJugadores;
     private double valorCarton;
-    private List<Figura> figuras;
+    private Figura[] figuras;
 
-    public Configuracion(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, List<Figura> figuras) {
+    public Configuracion(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, Figura[] figuras) {
         this.filasCarton = filasCarton;
         this.columnasCarton = columnasCarton;
         this.maxCartones = maxCartones;
@@ -60,11 +60,11 @@ public class Configuracion {
         this.valorCarton = valorCarton;
     }
 
-    public List<Figura> getFiguras() {
+    public Figura[] getFiguras() {
         return figuras;
     }
 
-    public void setFiguras(List<Figura> figuras) {
+    public void setFiguras(Figura[] figuras) {
         this.figuras = figuras;
     }
     
