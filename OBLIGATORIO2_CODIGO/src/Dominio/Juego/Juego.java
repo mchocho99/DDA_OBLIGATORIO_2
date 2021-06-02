@@ -1,11 +1,13 @@
 package Dominio.Juego;
 
 import Dominio.Usuarios.Jugador;
+import Utilidades.Observable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Juego {
-    private List<Jugador> jugadores;
+public class Juego extends Observable{
+    private List<Jugador> todosLosJugadores;
+    private List<Jugador> activos;
     private int cantCartonesEnJuego;
     private int cantNumerosEnJuego;
     private int numero;
@@ -14,24 +16,36 @@ public class Juego {
     private EstadosJuego estado;
     
     public Juego(int numero) {
-        this.jugadores = new ArrayList<>();
+        this.todosLosJugadores = new ArrayList<>();
+        this.activos = new ArrayList<>();
         this.numerosQueSalieron = new ArrayList<>();
         this.numero = numero;
         this.numerosDelJuego = new ArrayList<>();
         this.estado = EstadosJuego.EN_ESPERA;
     }
 
-    public List<Jugador> getJugadores() {
-        return jugadores;
+    public List<Jugador> getTodosLosJugadores() {
+        return todosLosJugadores;
     }
 
-    public void setJugadores(Jugador jugador) {
-        if(!this.jugadores.contains(jugador)) {
-            this.jugadores.add(jugador);
+    public void setJugador(Jugador jugador) {
+        if(!this.todosLosJugadores.contains(jugador)) {
+            this.todosLosJugadores.add(jugador);
             setNumerosDelJuego(jugador);
         }
     }
 
+    public List<Jugador> getActivos() {
+        return activos;
+    }
+
+    public void setJugadorActivo(Jugador jugador) {
+        if(!this.activos.contains(jugador)) {
+            this.activos.add(jugador);
+            setNumerosDelJuego(jugador);
+        }
+    }
+    
     public int getCantCartonesEnJuego() {
         return cantCartonesEnJuego;
     }

@@ -1,9 +1,17 @@
 package Utilidades;
 
 import Dominio.Juego.Figura;
-import java.util.List;
 
 public class Configuracion {
+    private static Configuracion instancia;
+    
+    public static Configuracion getInstancia(){
+        if (instancia == null) {
+            instancia = new Configuracion();
+        }
+        return instancia;
+    }
+   
     private int filasCarton;
     private int columnasCarton;
     private int maxCartones;
@@ -11,6 +19,10 @@ public class Configuracion {
     private double valorCarton;
     private Figura[] figuras;
 
+    public Configuracion(){
+        
+    }
+    
     public Configuracion(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, Figura[] figuras) {
         this.filasCarton = filasCarton;
         this.columnasCarton = columnasCarton;
