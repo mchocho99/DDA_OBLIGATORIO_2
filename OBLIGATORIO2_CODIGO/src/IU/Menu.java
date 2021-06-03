@@ -31,8 +31,9 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menu_LoginAdmin = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        menu_LoginJugador = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -40,14 +41,28 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu2.setText("File");
+        jMenu2.setText("Login Administrador");
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenu2.add(jMenuItem2);
+        menu_LoginAdmin.setText("Login Administrador");
+        menu_LoginAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_LoginAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu_LoginAdmin);
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Edit");
+        jMenu3.setText("Login Jugador");
+
+        menu_LoginJugador.setText("Login Jugador");
+        menu_LoginJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_LoginJugadorActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menu_LoginJugador);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -65,6 +80,18 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menu_LoginAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_LoginAdminActionPerformed
+        IULoginAdministrador ventanaLoginAdmin = new IULoginAdministrador(null, false);
+        ventanaLoginAdmin.setVisible(true);
+        ventanaLoginAdmin.setLocationRelativeTo(this);
+    }//GEN-LAST:event_menu_LoginAdminActionPerformed
+
+    private void menu_LoginJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_LoginJugadorActionPerformed
+        IULoginJugador ventanaLoginJugador = new IULoginJugador(null, false);
+        ventanaLoginJugador.setVisible(true);
+        ventanaLoginJugador.setLocationRelativeTo(this);
+    }//GEN-LAST:event_menu_LoginJugadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -107,6 +134,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem menu_LoginAdmin;
+    private javax.swing.JMenuItem menu_LoginJugador;
     // End of variables declaration//GEN-END:variables
 }

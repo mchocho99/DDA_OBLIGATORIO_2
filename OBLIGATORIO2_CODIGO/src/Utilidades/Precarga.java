@@ -1,5 +1,6 @@
 package Utilidades;
 
+import Dominio.Fachada.Fachada;
 import Dominio.Usuarios.Administrador;
 import Dominio.Juego.CartonLleno;
 import Dominio.Juego.Diagonal;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 
 public class Precarga {
     public static void cargar() {
+        
+        Fachada fachada = Fachada.getInstancia();
         
         /*FIGURAS*/
         Linea linea = new Linea("Línea");
@@ -34,5 +37,7 @@ public class Precarga {
         Jugador jugador3 = new Jugador(50000, "12345671", "jugador1235", "Jugador3", config.getMaxCartones());
         Jugador jugador4 = new Jugador(60000, "12345672", "jugador1236", "Jugador4", config.getMaxCartones());
         Jugador jugador5 = new Jugador(1000, "12345673", "jugador1237", "Jugador5", config.getMaxCartones());
+        
+        fachada.agregarUsuario(admin1);   
     }
 }
