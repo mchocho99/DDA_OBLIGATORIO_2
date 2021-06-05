@@ -11,6 +11,13 @@ public class Configuracion {
         }
         return instancia;
     }
+    
+    public static Configuracion getInstancia(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, Figura[] figuras){
+        if (instancia == null) {
+            instancia = new Configuracion(filasCarton, columnasCarton,  maxCartones, cantJugadores,  valorCarton, figuras);
+        }
+        return instancia;
+    }
    
     private int filasCarton;
     private int columnasCarton;

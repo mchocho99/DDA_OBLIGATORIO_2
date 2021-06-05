@@ -1,6 +1,7 @@
 package Dominio.Juego;
 
 import Dominio.Usuarios.Jugador;
+import Excepciones.ExcepcionJuego;
 import Utilidades.Observable;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,11 @@ public class Juego extends Observable{
     public void setEstado(EstadosJuego estado) {
         this.estado = estado;
     }
-    
-    
+
+    void jugadorPerteneceABingo(Jugador jugador) throws ExcepcionJuego{
+        if (activos.contains(jugador)) {
+            throw new ExcepcionJuego("El jugador " + jugador.getCedula() + " ya está participando del bingo");
+        }
+    }
     
 }

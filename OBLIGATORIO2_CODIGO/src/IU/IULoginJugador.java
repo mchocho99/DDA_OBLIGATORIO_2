@@ -5,19 +5,26 @@
  */
 package IU;
 
+import Controlador.ControladorLoginJugador;
+import Controlador.VistaLoginJugador;
+import Dominio.Usuarios.Jugador;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
  */
-public class IULoginJugador extends javax.swing.JDialog {
+public class IULoginJugador extends javax.swing.JDialog implements VistaLoginJugador{
 
+   private ControladorLoginJugador controlador;
+    
     /**
      * Creates new form IULoginJugador
      */
     public IULoginJugador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setTitle("Login jugador");
+        this.controlador = new ControladorLoginJugador(this);
     }
 
     /**
@@ -36,7 +43,7 @@ public class IULoginJugador extends javax.swing.JDialog {
         txt_CantCartones = new javax.swing.JTextField();
         btn_Ingresar = new javax.swing.JButton();
         label_CantCartones = new javax.swing.JLabel();
-        txt_password1 = new javax.swing.JTextField();
+        txt_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,15 +70,14 @@ public class IULoginJugador extends javax.swing.JDialog {
 
         btn_Ingresar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_Ingresar.setText("Ingresar");
+        btn_Ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_IngresarActionPerformed(evt);
+            }
+        });
 
         label_CantCartones.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label_CantCartones.setText("Cant. Cartones:");
-
-        txt_password1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_password1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,41 +92,43 @@ public class IULoginJugador extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_Ingresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_Ingresar, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(txt_Cedula)
-                            .addComponent(txt_password1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_CantCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(70, 70, 70))))
+                            .addComponent(jLabel1)
+                            .addComponent(txt_CantCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txt_Cedula, txt_password});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_Cedula))
-                .addGap(24, 24, 24)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_Password)
-                    .addComponent(txt_password1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_CantCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_CantCartones))
                 .addGap(18, 18, 18)
                 .addComponent(btn_Ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txt_CantCartones, txt_Cedula});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txt_CantCartones, txt_Cedula, txt_password});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,9 +141,13 @@ public class IULoginJugador extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_CantCartonesActionPerformed
 
-    private void txt_password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_password1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_password1ActionPerformed
+    private void btn_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IngresarActionPerformed
+       String cedula = txt_Cedula.getText();
+       String password = txt_password.getText();
+       String cantCartones = txt_CantCartones.getText();
+       
+       controlador.login(cedula, password, cantCartones);  
+    }//GEN-LAST:event_btn_IngresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +199,26 @@ public class IULoginJugador extends javax.swing.JDialog {
     private javax.swing.JLabel label_Password;
     private javax.swing.JTextField txt_CantCartones;
     private javax.swing.JTextField txt_Cedula;
-    private javax.swing.JTextField txt_password1;
+    private javax.swing.JPasswordField txt_password;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mostrarProximaInterfaz(Jugador jugador) {
+        JOptionPane.showMessageDialog(this, "HOLIII","GOOOOOOOOOOOOOOOOD",JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje,"ERROR",JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void cerrar() {
+        this.dispose();
+    }
+
+    @Override
+    public void mostrarTitulo(String titulo) {
+        this.setTitle(titulo);
+    }
 }

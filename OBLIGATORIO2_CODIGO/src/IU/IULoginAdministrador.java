@@ -110,8 +110,10 @@ public class IULoginAdministrador extends javax.swing.JDialog implements VistaLo
                     .addComponent(txt_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(btn_Ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txt_Cedula, txt_Password});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -180,12 +182,12 @@ public class IULoginAdministrador extends javax.swing.JDialog implements VistaLo
 
     @Override
     public void mostrarProximaInterfaz(Administrador administrador) {
-        JOptionPane.showMessageDialog(null, "Hola" + administrador.getCedula(), "GOOOOOD", JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(this, "Hola" + administrador.getCedula(), "GOOOOOD", JOptionPane.OK_OPTION);
     }
 
     @Override
     public void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje, "ERROR", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
 
     @Override

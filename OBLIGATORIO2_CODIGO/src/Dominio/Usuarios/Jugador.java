@@ -1,6 +1,7 @@
 package Dominio.Usuarios;
 
 import Dominio.Juego.Carton;
+import Excepciones.ExcepcionJuego;
 import java.util.List;
 
 public class Jugador extends Usuario {
@@ -29,6 +30,12 @@ public class Jugador extends Usuario {
 
     public int getCantCartones() {
         return cantCartones;
+    }
+
+    public void saldoSuficiente(double valorCartones) throws ExcepcionJuego{
+        if (valorCartones > this.getSaldo()) {
+            throw new ExcepcionJuego("Saldo insuficiente");
+        }
     }
     
 }
