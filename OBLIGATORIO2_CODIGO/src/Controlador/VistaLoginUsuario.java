@@ -1,9 +1,9 @@
 package Controlador;
 
-import Dominio.Usuarios.Jugador;
+import Dominio.Usuarios.Usuario;
 
-public interface VistaLoginJugador {
-    public void mostrarProximaInterfaz(Jugador jugador);
+public interface VistaLoginUsuario {
+    public void mostrarProximaInterfaz(Usuario usuario);
     public void mostrarError(String mensaje);
     public void cerrar();
     public void mostrarTitulo(String titulo);

@@ -5,16 +5,16 @@
  */
 package IU;
 
-import Controlador.VistaLoginAdministrador;
-import Dominio.Usuarios.Administrador;
+import Controlador.VistaLoginUsuario;
 import Controlador.ControladorLoginAdministrador;
+import Dominio.Usuarios.Usuario;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Usuario
  */
-public class IULoginAdministrador extends javax.swing.JDialog implements VistaLoginAdministrador {
+public class IULoginAdministrador extends javax.swing.JDialog implements VistaLoginUsuario {
 
     private ControladorLoginAdministrador controlador;
     
@@ -181,8 +181,8 @@ public class IULoginAdministrador extends javax.swing.JDialog implements VistaLo
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void mostrarProximaInterfaz(Administrador administrador) {
-        JOptionPane.showMessageDialog(this, "Hola" + administrador.getCedula(), "GOOOOOD", JOptionPane.OK_OPTION);
+    public void mostrarProximaInterfaz(Usuario usuario) {
+        JOptionPane.showMessageDialog(this, "Hola" + usuario.getCedula(), "GOOOOOD", JOptionPane.OK_OPTION);
     }
 
     @Override

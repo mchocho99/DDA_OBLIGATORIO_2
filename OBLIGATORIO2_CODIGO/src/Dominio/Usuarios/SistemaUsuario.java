@@ -16,10 +16,6 @@ public class SistemaUsuario {
         return jugadores;
     }
 
-    public Administrador loginAdministrador(String cedula, String password) throws ExcepcionUsuario{
-        return (Administrador)(this.LoginGeneral(cedula, password));
-    }
-
     private Usuario getUsuario(String cedula) {
         int i = 0;
         while(i<usuarios.size()) {
@@ -35,11 +31,7 @@ public class SistemaUsuario {
         if(!usuarios.contains(usuario)) usuarios.add(usuario);
     }
     
-    public Jugador loginJugador(String cedula, String password, int cantCartones) throws ExcepcionUsuario{
-        return (Jugador)(this.LoginGeneral(cedula, password));     
-    }
-    
-    public Usuario LoginGeneral(String cedula, String password)throws ExcepcionUsuario{
+    public Usuario login(String cedula, String password)throws ExcepcionUsuario {
         Usuario usuario = this.getUsuario(cedula);
         if(usuario == null) {
             throw new ExcepcionUsuario("Acceso denegado");

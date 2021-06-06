@@ -2,43 +2,48 @@ package Controlador;
 
 import Dominio.Fachada.Fachada;
 import Dominio.Usuarios.Jugador;
+import Dominio.Usuarios.Usuario;
 import Excepciones.ExcepcionJuego;
 import Excepciones.ExcepcionUsuario;
 
 public class ControladorLoginJugador {
     private Fachada fachada = Fachada.getInstancia();
-    private VistaLoginJugador vista;
+    private VistaLoginUsuario vista;
 
-    public ControladorLoginJugador(VistaLoginJugador vista) {
+    public ControladorLoginJugador(VistaLoginUsuario vista) {
         this.vista = vista;
     }
 
     public void login(String cedula, String password, String cantCartones) {
-        int cantCartonesInt = parsearInt(cantCartones);
-        
-        if (cantCartonesInt <= 0 ) {
-            vista.mostrarError("Indique con cuantos cartones desea jugar");
-        }
-       
-        try {
-            fachada.cantCartonesMayorMaxCartones(cantCartonesInt);
-            Jugador jugador = fachada.loginJugador(cedula, password, cantCartonesInt);
-            fachada.jugadorPerteneceABingo(jugador);
-            fachada.saldoJugadorNoSuficiente(jugador, cantCartonesInt);
-            vista.mostrarProximaInterfaz(jugador);
-            
-        } catch (ExcepcionUsuario | ExcepcionJuego e) {
-            vista.mostrarError(e.getMessage());
-        }
+        if(esNumerico(cantCartones)) {
+            int cantCartonesInt = Integer.parseInt(cantCartones);
+            if(cantCartonesInt > 0) {
+                try {
+                    fachada.cantCartonesMayorMaxCartones(cantCartonesInt);
+                    Usuario usuario = fachada.login(cedula, password);
+                    Jugador jugador = (Jugador)usuario;
+                    fachada.jugadorPerteneceABingo(jugador);
+                    fachada.saldoJugadorNoSuficiente(jugador, cantCartonesInt);
+                    vista.mostrarProximaInterfaz(jugador);
+
+                } catch (ExcepcionUsuario | ExcepcionJuego e) {
+                    vista.mostrarError(e.getMessage());
+                }
+            }else {
+                vista.mostrarError("Indique con cuantos cartones desea jugar");
+            }
+        }else {
+            vista.mostrarError("Debes ingresar un número");
+        }  
     }
 
-    private int parsearInt(String cantCartones) {
+    private boolean esNumerico(String cantCartones) {
         try {
-            return Integer.parseInt(cantCartones);
-        } catch (Exception e) {
-            vista.mostrarError("Debes ingresar un número");
+            Integer.parseInt(cantCartones);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        return -1;
     }
     
     

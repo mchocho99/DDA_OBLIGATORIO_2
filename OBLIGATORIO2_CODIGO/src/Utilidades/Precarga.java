@@ -8,7 +8,6 @@ import Dominio.Juego.Figura;
 import Dominio.Juego.Linea;
 import Dominio.Juego.Perimetro;
 import Dominio.Usuarios.Jugador;
-import java.util.ArrayList;
 
 public class Precarga {
     public static void cargar() {
@@ -24,7 +23,7 @@ public class Precarga {
         figuras[3] = cartonLleno;
         
         /*CONFIGURACION*/
-        Configuracion config = Configuracion.getInstancia(3, 3, 3, 3, 100, figuras);
+        Configuracion config = Configuracion.getInstancia(3, 3, 3, 3, 10000, figuras);
         
         Fachada fachada = Fachada.getInstancia();
         

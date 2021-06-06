@@ -1,5 +1,6 @@
 package Dominio.Fachada;
 
+import Dominio.Juego.Juego;
 import Dominio.Juego.SistemaJuego;
 import Dominio.Usuarios.Administrador;
 import Dominio.Usuarios.Jugador;
@@ -21,9 +22,9 @@ public class Fachada {
     private SistemaJuego sJuego = new SistemaJuego();
     private SistemaUsuario sUsuario = new SistemaUsuario();
     
-
-    public Administrador loginAdministrador(String cedula, String password) throws ExcepcionUsuario {
-        return sUsuario.loginAdministrador(cedula, password);
+    
+    public Usuario login(String cedula, String password) throws ExcepcionUsuario {
+        return sUsuario.login(cedula, password);
     }
 
     public void agregarUsuario(Usuario usuario) {
@@ -34,15 +35,15 @@ public class Fachada {
         sJuego.cantCartonesMayorMaxCartones(cantCartones);
     }
 
-    public Jugador loginJugador(String cedula, String password, int cantCartones) throws ExcepcionUsuario{
-        return sUsuario.loginJugador(cedula, password, cantCartones);
-    }
-
     public void jugadorPerteneceABingo(Jugador jugador) throws ExcepcionJuego{
         sJuego.jugadorPerteneceABingo(jugador);
     }
 
     public void saldoJugadorNoSuficiente(Jugador jugador, int cantCartones) throws ExcepcionJuego{
         sJuego.saldoJugadorNoSuficiente(jugador, cantCartones);
+    }
+
+    public Juego agregarJugadorAlJuego(Jugador jugador) throws ExcepcionJuego{
+        return sJuego.agregarJugadorAlJuego(jugador);
     }
 }

@@ -20,7 +20,7 @@ public class SistemaJuego {
 
     public void cantCartonesMayorMaxCartones(int cantCartones) throws ExcepcionJuego{
         if (cantCartones > config.getMaxCartones()) {
-            throw new ExcepcionJuego("No puede participar con más de " + cantCartones + " cartones");
+            throw new ExcepcionJuego("No puede participar con más de " + config.getMaxCartones() + " cartones");
         }
     }
 
@@ -33,6 +33,13 @@ public class SistemaJuego {
     public void saldoJugadorNoSuficiente(Jugador jugador, int cantCartones) throws ExcepcionJuego{
         double valorCartones = cantCartones * (config.getValorCarton() * 3);
         jugador.saldoSuficiente(valorCartones);
+    }
+
+    public Juego agregarJugadorAlJuego(Jugador jugador) throws ExcepcionJuego {
+        //buscar si el jugador pertenece a un Juego.
+        //Si el jugador no pertenece al juego, salir a buscar el primer juego que este en espera que entre.
+        //Si no hay uno en espera, se crea un Juego nuevo y se pone en espera.
+        return null;
     }
     
 }

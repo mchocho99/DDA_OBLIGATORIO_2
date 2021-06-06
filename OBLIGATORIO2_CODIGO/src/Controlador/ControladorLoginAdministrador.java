@@ -2,22 +2,22 @@ package Controlador;
 
 import Dominio.Fachada.Fachada;
 import Dominio.Usuarios.Administrador;
+import Dominio.Usuarios.Usuario;
 import Excepciones.ExcepcionUsuario;
 
 public class ControladorLoginAdministrador {
-    private VistaLoginAdministrador vista;
+    private VistaLoginUsuario vista;
     private Fachada fachada = Fachada.getInstancia();
     
-    public ControladorLoginAdministrador(VistaLoginAdministrador vista) {
+    public ControladorLoginAdministrador(VistaLoginUsuario vista) {
         this.vista = vista;
         vista.mostrarTitulo("Login administrador");
     }
 
     public void login(String cedula, String password) {
         try {
-            Administrador admin = fachada.loginAdministrador(cedula, password);
-            vista.mostrarProximaInterfaz(admin);
-            vista.cerrar();
+            Usuario usuario = fachada.login(cedula, password);
+            vista.mostrarProximaInterfaz(usuario);
         } catch (ExcepcionUsuario ex) {
             vista.mostrarError(ex.getMessage());
         }

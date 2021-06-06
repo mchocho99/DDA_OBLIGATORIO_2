@@ -6,15 +6,16 @@
 package IU;
 
 import Controlador.ControladorLoginJugador;
-import Controlador.VistaLoginJugador;
+import Controlador.VistaLoginUsuario;
 import Dominio.Usuarios.Jugador;
+import Dominio.Usuarios.Usuario;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Usuario
  */
-public class IULoginJugador extends javax.swing.JDialog implements VistaLoginJugador{
+public class IULoginJugador extends javax.swing.JDialog implements VistaLoginUsuario {
 
    private ControladorLoginJugador controlador;
     
@@ -203,8 +204,10 @@ public class IULoginJugador extends javax.swing.JDialog implements VistaLoginJug
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void mostrarProximaInterfaz(Jugador jugador) {
-        JOptionPane.showMessageDialog(this, "HOLIII","GOOOOOOOOOOOOOOOOD",JOptionPane.ERROR_MESSAGE);
+    public void mostrarProximaInterfaz(Usuario usuario) {
+        IUJuego ventanaJuego = new IUJuego(null, false, (Jugador)usuario);
+        ventanaJuego.setVisible(true);
+        ventanaJuego.setLocationRelativeTo(this);
     }
 
     @Override
