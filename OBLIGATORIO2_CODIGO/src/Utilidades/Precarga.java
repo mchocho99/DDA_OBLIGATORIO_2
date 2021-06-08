@@ -11,6 +11,8 @@ import Dominio.Usuarios.Jugador;
 
 public class Precarga {
     public static void cargar() {
+        
+        
         /*FIGURAS*/
         Linea linea = new Linea("Línea");
         Diagonal diagonal = new Diagonal("Diagonal");
@@ -23,13 +25,10 @@ public class Precarga {
         figuras[3] = cartonLleno;
         
         /*CONFIGURACION*/
-        Configuracion config = Configuracion.getInstancia(3, 3, 3, 3, 10000, figuras);
-        
+        Configuracion config = Configuracion.getInstancia();
+        config.setearConfig(3, 3, 3, 3, 10000, figuras);
         Fachada fachada = Fachada.getInstancia();
         
-        
-        
-
         /*USUARIOS*/
         Administrador admin1 = new Administrador("admin1@gmail.com", "12345678", "admin123", "Admin1");
 

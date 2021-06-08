@@ -11,14 +11,7 @@ public class Configuracion {
         }
         return instancia;
     }
-    
-    public static Configuracion getInstancia(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, Figura[] figuras){
-        if (instancia == null) {
-            instancia = new Configuracion(filasCarton, columnasCarton,  maxCartones, cantJugadores,  valorCarton, figuras);
-        }
-        return instancia;
-    }
-   
+ 
     private int filasCarton;
     private int columnasCarton;
     private int maxCartones;
@@ -28,15 +21,6 @@ public class Configuracion {
 
     public Configuracion(){
         
-    }
-    
-    public Configuracion(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, Figura[] figuras) {
-        this.filasCarton = filasCarton;
-        this.columnasCarton = columnasCarton;
-        this.maxCartones = maxCartones;
-        this.cantJugadores = cantJugadores;
-        this.valorCarton = valorCarton;
-        this.figuras = figuras;
     }
     
     public int getFilasCarton() {
@@ -85,6 +69,15 @@ public class Configuracion {
 
     public void setFiguras(Figura[] figuras) {
         this.figuras = figuras;
+    }
+
+    public void setearConfig(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, Figura[] figuras) {
+        this.setFilasCarton(filasCarton);
+        this.setColumnasCarton(columnasCarton);
+        this.setMaxCartones(maxCartones);
+        this.setCantJugadores(cantJugadores);
+        this.setValorCarton(valorCarton);
+        this.setFiguras(figuras);
     }
     
     

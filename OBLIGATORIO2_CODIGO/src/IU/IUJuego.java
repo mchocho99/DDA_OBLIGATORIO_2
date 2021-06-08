@@ -46,11 +46,18 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
 
         btn_Abandonar.setText("Abandonar");
 
+        txt_SecuenciaNumSorteados.setEditable(false);
         txt_SecuenciaNumSorteados.setBackground(new java.awt.Color(204, 204, 204));
         txt_SecuenciaNumSorteados.setForeground(new java.awt.Color(204, 204, 204));
-        txt_SecuenciaNumSorteados.setText("jTextField1");
 
+        txt_EstadoJuego.setEditable(false);
         txt_EstadoJuego.setBackground(new java.awt.Color(204, 204, 204));
+
+        txt_SaldoJugador.setEditable(false);
+
+        txt_NumeroSorteado.setEditable(false);
+
+        txt_MontoPozo.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
