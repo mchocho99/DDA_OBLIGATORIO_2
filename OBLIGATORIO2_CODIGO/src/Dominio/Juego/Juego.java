@@ -15,14 +15,16 @@ public class Juego extends Observable{
     private List<Numero> numerosQueSalieron;
     private List<Numero> numerosDelJuego;
     private EstadosJuego estado;
+    private List<TipoFigura> figurasHabilitadas;
     
-    public Juego(int numero) {
+    public Juego(int numero, List<TipoFigura> figurasHabilitadas) {
         this.todosLosJugadores = new ArrayList<>();
         this.activos = new ArrayList<>();
         this.numerosQueSalieron = new ArrayList<>();
         this.numero = numero;
         this.numerosDelJuego = new ArrayList<>();
         this.estado = EstadosJuego.EN_ESPERA;
+        this.figurasHabilitadas = figurasHabilitadas;
     }
 
     public List<Jugador> getTodosLosJugadores() {

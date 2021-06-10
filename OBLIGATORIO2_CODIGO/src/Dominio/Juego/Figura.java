@@ -1,15 +1,13 @@
 package Dominio.Juego;
 
 public abstract class Figura {
-    private String nombre;
+    private TipoFigura tipo;
 
-    public Figura(String nombre) {
-        this.nombre = nombre;
+    public Figura(TipoFigura tipo) {
+        this.tipo = tipo;
     }
     
-    public String getNombre() {
-        return nombre;
+    public TipoFigura getTipoFigura() {
+        return tipo;
     }
-    
-    public abstract boolean completo(Numero[][] matrizCarton, int filas, int columnas);
 }

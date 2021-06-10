@@ -1,6 +1,6 @@
 package Dominio.Juego;
 
-public class CartonLleno extends Figura{
+public class CartonLleno extends TipoFigura {
 
     public CartonLleno(String nombre) {
         super(nombre);

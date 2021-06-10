@@ -1,6 +1,6 @@
 package Dominio.Juego;
 
-public class Linea extends Figura {
+public class Linea extends TipoFigura {
 
     public Linea(String nombre) {
         super(nombre);

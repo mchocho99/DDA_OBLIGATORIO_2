@@ -1,6 +1,7 @@
 package Utilidades;
 
 import Dominio.Juego.Figura;
+import Dominio.Juego.TipoFigura;
 
 public class Configuracion {
     private static Configuracion instancia;
@@ -17,7 +18,7 @@ public class Configuracion {
     private int maxCartones;
     private int cantJugadores;
     private double valorCarton;
-    private Figura[] figuras;
+    private TipoFigura[] figurasHabilitadas;
 
     public Configuracion(){
         
@@ -63,21 +64,21 @@ public class Configuracion {
         this.valorCarton = valorCarton;
     }
 
-    public Figura[] getFiguras() {
-        return figuras;
+    public TipoFigura[] getFigurasHabilitadas() {
+        return figurasHabilitadas;
     }
 
-    public void setFiguras(Figura[] figuras) {
-        this.figuras = figuras;
+    public void setFigurasHabilitadas(TipoFigura[] figurasHabilitadas) {
+        this.figurasHabilitadas = figurasHabilitadas;
     }
 
-    public void setearConfig(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, Figura[] figuras) {
+    public void setearConfig(int filasCarton, int columnasCarton, int maxCartones, int cantJugadores, double valorCarton, TipoFigura[] figurasHabilitadas) {
         this.setFilasCarton(filasCarton);
         this.setColumnasCarton(columnasCarton);
         this.setMaxCartones(maxCartones);
         this.setCantJugadores(cantJugadores);
         this.setValorCarton(valorCarton);
-        this.setFiguras(figuras);
+        this.setFigurasHabilitadas(figurasHabilitadas);
     }
     
     

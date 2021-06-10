@@ -1,6 +1,6 @@
 package Dominio.Juego;
 
-public class Diagonal extends Figura {
+public class Diagonal extends TipoFigura {
 
     public Diagonal(String nombre) {
         super(nombre);

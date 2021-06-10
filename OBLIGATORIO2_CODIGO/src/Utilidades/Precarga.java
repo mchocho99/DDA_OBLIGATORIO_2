@@ -1,12 +1,15 @@
 package Utilidades;
 
 import Dominio.Fachada.Fachada;
+import Dominio.Juego.Carton;
 import Dominio.Usuarios.Administrador;
 import Dominio.Juego.CartonLleno;
 import Dominio.Juego.Diagonal;
 import Dominio.Juego.Figura;
 import Dominio.Juego.Linea;
+import Dominio.Juego.Numero;
 import Dominio.Juego.Perimetro;
+import Dominio.Juego.TipoFigura;
 import Dominio.Usuarios.Jugador;
 
 public class Precarga {
@@ -18,15 +21,15 @@ public class Precarga {
         Diagonal diagonal = new Diagonal("Diagonal");
         Perimetro perimetro = new Perimetro("Perímetro");
         CartonLleno cartonLleno = new CartonLleno("Cartón Lleno");
-        Figura[] figuras = new Figura[4];
-        figuras[0] = linea;
-        figuras[1] = diagonal;
-        figuras[2] = perimetro;
-        figuras[3] = cartonLleno;
+        TipoFigura[] figurasHabilitadas = new TipoFigura[4];
+        figurasHabilitadas[0] = new Linea("Linea");
+        figurasHabilitadas[1] = new Diagonal("Diagonal");
+        figurasHabilitadas[2] = new Perimetro("Perimetro");
+        figurasHabilitadas[3] = new CartonLleno("Carton Lleno");
         
         /*CONFIGURACION*/
         Configuracion config = Configuracion.getInstancia();
-        config.setearConfig(3, 3, 3, 3, 10000, figuras);
+        config.setearConfig(3, 3, 3, 3, 10000, figurasHabilitadas);
         Fachada fachada = Fachada.getInstancia();
         
         /*USUARIOS*/
@@ -40,5 +43,15 @@ public class Precarga {
         
         fachada.agregarUsuario(admin1);   
         fachada.agregarUsuario(jugador1);
+        
+        Carton carton1Jugador1 = new Carton(config.getFilasCarton(), config.getColumnasCarton(), config.getValorCarton());
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                carton1Jugador1.getMatrizCarton()[i][j] = new Numero(1, false);
+            }
+        }
+        
+        jugador1.setCarton(carton1Jugador1);
     }
 }

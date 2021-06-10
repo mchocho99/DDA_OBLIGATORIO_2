@@ -9,7 +9,7 @@ public class Carton {
     private double valor;
     private List<Figura> figuras;
 
-    public Carton(int filasCarton, int columnasCarton, double valor, List<Figura> figuras) {
+    public Carton(int filasCarton, int columnasCarton, double valor) {
         this.cantNumeros = filasCarton*columnasCarton;
         
         this.matrizCarton = new Numero[filasCarton][columnasCarton];
@@ -20,7 +20,7 @@ public class Carton {
         }
         
         this.valor = valor;
-        this.figuras = figuras;
+        this.figuras = new ArrayList<>();
     }
 
     public Numero[][] getMatrizCarton() {

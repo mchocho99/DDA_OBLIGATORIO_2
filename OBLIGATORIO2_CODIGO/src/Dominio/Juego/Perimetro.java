@@ -1,6 +1,6 @@
 package Dominio.Juego;
 
-public class Perimetro extends Figura{
+public class Perimetro extends TipoFigura {
 
     public Perimetro(String nombre) {
         super(nombre);

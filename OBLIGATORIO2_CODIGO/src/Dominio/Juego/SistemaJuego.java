@@ -41,5 +41,13 @@ public class SistemaJuego {
         //Si no hay uno en espera, se crea un Juego nuevo y se pone en espera.
         return null;
     }
+
+    public int getCantFilasCarton() {
+        return this.config.getFilasCarton();
+    }
+
+    public int getCantColumnasCarton() {
+        return this.config.getColumnasCarton();
+    }
     
 }

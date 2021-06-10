@@ -46,4 +46,12 @@ public class Fachada {
     public Juego agregarJugadorAlJuego(Jugador jugador) throws ExcepcionJuego{
         return sJuego.agregarJugadorAlJuego(jugador);
     }
+
+    public int getCantFilasCarton() {
+        return sJuego.getCantFilasCarton();
+    }
+
+    public int getCantColumnasCarton() {
+        return sJuego.getCantColumnasCarton();
+    }
 }
