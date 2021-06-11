@@ -16,8 +16,9 @@ public class Juego extends Observable{
     private List<Numero> numerosDelJuego;
     private EstadosJuego estado;
     private List<TipoFigura> figurasHabilitadas;
+    private int cantMaxJugadores;
     
-    public Juego(int numero, List<TipoFigura> figurasHabilitadas) {
+    public Juego(int numero, List<TipoFigura> figurasHabilitadas, int cantMaxJugadores) {
         this.todosLosJugadores = new ArrayList<>();
         this.activos = new ArrayList<>();
         this.numerosQueSalieron = new ArrayList<>();
@@ -25,6 +26,7 @@ public class Juego extends Observable{
         this.numerosDelJuego = new ArrayList<>();
         this.estado = EstadosJuego.EN_ESPERA;
         this.figurasHabilitadas = figurasHabilitadas;
+        this.cantMaxJugadores = cantMaxJugadores;
     }
 
     public List<Jugador> getTodosLosJugadores() {
@@ -34,8 +36,16 @@ public class Juego extends Observable{
     public void setJugador(Jugador jugador) {
         if(!this.todosLosJugadores.contains(jugador)) {
             this.todosLosJugadores.add(jugador);
-            setNumerosDelJuego(jugador);
         }
+        if(this.todosLosJugadores.size() == this.cantMaxJugadores) {
+            //CAMBIA ESTADO SE EJECUTA UN EVENTO
+            this.setEstado(EstadosJuego.ACTIVO);      
+            setNumerosDelJuego();
+            for (Jugador jug : todosLosJugadores) {
+                this.setJugadorActivo(jug);
+            }
+        }
+        
     }
 
     public List<Jugador> getActivos() {
@@ -45,7 +55,6 @@ public class Juego extends Observable{
     public void setJugadorActivo(Jugador jugador) {
         if(!this.activos.contains(jugador)) {
             this.activos.add(jugador);
-            setNumerosDelJuego(jugador);
         }
     }
     
@@ -83,8 +92,8 @@ public class Juego extends Observable{
         return numerosDelJuego;
     }
 
-    public void setNumerosDelJuego(Jugador jugador) {
-        //recorrer los cartones del jugador y agregar a la lista de numeros del juego
+    public void setNumerosDelJuego() {
+       //EN BASE A LOS CARTONES DE TODOS LOS JUGADORES SETEA LOS NUMEROS A JUGAR
     }
 
     public EstadosJuego getEstado() {
@@ -96,9 +105,13 @@ public class Juego extends Observable{
     }
 
     void jugadorPerteneceABingo(Jugador jugador) throws ExcepcionJuego{
-        if (activos.contains(jugador)) {
+        if (todosLosJugadores.contains(jugador)) {
             throw new ExcepcionJuego("El jugador " + jugador.getCedula() + " ya está participando del bingo");
         }
+    }
+
+    public boolean estaEnEspera() {
+        return this.getEstado() == EstadosJuego.EN_ESPERA;
     }
     
 }

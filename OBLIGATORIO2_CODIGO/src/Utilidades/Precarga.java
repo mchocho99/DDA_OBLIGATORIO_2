@@ -29,7 +29,7 @@ public class Precarga {
         
         /*CONFIGURACION*/
         Configuracion config = Configuracion.getInstancia();
-        config.setearConfig(3, 3, 3, 3, 10000, figurasHabilitadas);
+        config.setearConfig(3, 3, 3, 3, 10, figurasHabilitadas);
         Fachada fachada = Fachada.getInstancia();
         
         /*USUARIOS*/
@@ -43,6 +43,7 @@ public class Precarga {
         
         fachada.agregarUsuario(admin1);   
         fachada.agregarUsuario(jugador1);
+        fachada.agregarUsuario(jugador1);
         
         Carton carton1Jugador1 = new Carton(config.getFilasCarton(), config.getColumnasCarton(), config.getValorCarton());
         
@@ -53,5 +54,18 @@ public class Precarga {
         }
         
         jugador1.setCarton(carton1Jugador1);
+        
+        Carton carton2Jugador1 = new Carton(config.getFilasCarton(), config.getColumnasCarton(), config.getValorCarton());
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                carton2Jugador1.getMatrizCarton()[i][j] = new Numero(i+j, false);
+                if (i+j == 0) {
+                    carton2Jugador1.getMatrizCarton()[i][j].setMarcado(true);
+                }
+            }
+        }
+        
+        jugador1.setCarton(carton2Jugador1);
     }
 }

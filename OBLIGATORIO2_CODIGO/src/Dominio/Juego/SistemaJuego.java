@@ -4,11 +4,13 @@ import Dominio.Usuarios.Jugador;
 import Excepciones.ExcepcionJuego;
 import Utilidades.Configuracion;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SistemaJuego {
     private List<Juego> juegos = new ArrayList();
     private Configuracion config = Configuracion.getInstancia();
+    private int idJuego = 1000;
 
     public List<Juego> getJuegos() {
         return juegos;
@@ -35,11 +37,26 @@ public class SistemaJuego {
         jugador.saldoSuficiente(valorCartones);
     }
 
-    public Juego agregarJugadorAlJuego(Jugador jugador) throws ExcepcionJuego {
-        //buscar si el jugador pertenece a un Juego.
-        //Si el jugador no pertenece al juego, salir a buscar el primer juego que este en espera que entre.
+    public Juego agregarJugadorAJuego(Jugador jugador){
+        //salir a buscar el primer juego que este en espera que entre.
         //Si no hay uno en espera, se crea un Juego nuevo y se pone en espera.
-        return null;
+        Juego juegoABuscar = null;
+        int largo = this.juegos.size();
+        int contador = 0;
+        boolean pertenece = false;
+        while(contador < largo && !pertenece){
+            Juego juegoActual = this.juegos.get(contador);
+            if (juegoActual.estaEnEspera()) {
+                juegoActual.setJugador(jugador);
+                juegoABuscar = juegoActual; 
+                pertenece = true;
+            }
+            contador++;
+        }
+        if (juegoABuscar == null) {
+            juegoABuscar = agregarNuevoJuego(jugador);
+        }
+        return juegoABuscar;
     }
 
     public int getCantFilasCarton() {
@@ -48,6 +65,14 @@ public class SistemaJuego {
 
     public int getCantColumnasCarton() {
         return this.config.getColumnasCarton();
+    }
+    
+    public Juego agregarNuevoJuego(Jugador jugador){
+        Juego juego = new Juego(this.idJuego, Arrays.asList(config.getFigurasHabilitadas()), config.getCantJugadores());
+        juego.setJugador(jugador);
+        juego.setEstado(EstadosJuego.EN_ESPERA);
+        this.idJuego++;
+        return juego;
     }
     
 }

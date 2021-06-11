@@ -3,7 +3,8 @@ package IU;
 import Controlador.ControladorJuego;
 import Controlador.VistaJuego;
 import Dominio.Usuarios.Jugador;
-import IU.gridLayout.ListaPaneles;
+import gridLayout.ListaPaneles;
+import javax.swing.JOptionPane;
 
 public class IUJuego extends javax.swing.JDialog implements VistaJuego {
 
@@ -144,6 +145,11 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
 
     @Override
     public void mostrarCartonesJugador(ListaPaneles paneles) {
-        this.panel_ContenedorCartones.setViewportView(paneles);    
+        panel_ContenedorCartones.setViewportView(paneles);
+    }
+
+    @Override
+    public void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
 }

@@ -1,27 +1,27 @@
-package IU.gridLayout;
+package gridLayout;
 
-import Dominio.Juego.Numero;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
-public class Casilla extends JButton {
+public class Boton extends JButton{
 
     private Object dato;
-    private MarcadorCasilla marcador;
+    private MarcadorBoton marcador;
 
-    public Casilla(Object dato, MarcadorCasilla marcador) {
+    public Boton(Object dato, MarcadorBoton marcador) {
         setFont(new Font("Tahoma", 1, 18));
         this.dato = dato;
         this.marcador = marcador;
-        setText(Integer.toString(((Numero)dato).getNumero()));
+        setText(marcador.getTexto(dato));
     }
     
     public void marcar() {
         if (marcador.marcar(dato)) {
             setBackground(Color.GREEN);
-            setForeground(Color.BLACK);
+            setForeground(Color.WHITE);
         }
-    }    
+    }
+
+    
 }

@@ -1,6 +1,6 @@
-package IU.gridLayout;
+package gridLayout;
 
-public interface MarcadorCasilla {
+public interface MarcadorBoton {
     public boolean marcar(Object dato);
     public String getTexto(Object dato);
 }

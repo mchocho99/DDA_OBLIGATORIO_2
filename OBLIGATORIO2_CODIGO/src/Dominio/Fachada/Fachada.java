@@ -43,8 +43,8 @@ public class Fachada {
         sJuego.saldoJugadorNoSuficiente(jugador, cantCartones);
     }
 
-    public Juego agregarJugadorAlJuego(Jugador jugador) throws ExcepcionJuego{
-        return sJuego.agregarJugadorAlJuego(jugador);
+    public Juego agregarJugadorAJuego(Jugador jugador){
+        return sJuego.agregarJugadorAJuego(jugador);
     }
 
     public int getCantFilasCarton() {

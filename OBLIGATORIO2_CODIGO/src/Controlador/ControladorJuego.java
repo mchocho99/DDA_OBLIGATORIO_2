@@ -3,45 +3,69 @@ package Controlador;
 import Dominio.Fachada.Fachada;
 import Dominio.Juego.Carton;
 import Dominio.Juego.Juego;
+import Dominio.Juego.Numero;
 import Dominio.Usuarios.Jugador;
-import IU.gridLayout.ListaPaneles;
-import IU.gridLayout.MarcadorCasilla;
+import Excepciones.ExcepcionJuego;
+import gridLayout.ListaPaneles;
+import gridLayout.MarcadorBoton;
+import java.util.List;
+import javax.swing.JOptionPane;
 
-public class ControladorJuego implements MarcadorCasilla {
+public class ControladorJuego implements MarcadorBoton{
 
     private VistaJuego vista;
     private Fachada fachada = Fachada.getInstancia();
     private Jugador jugador;
     private Juego juego;
     
-    public ControladorJuego(VistaJuego vista, Jugador jugador) {
+    public ControladorJuego(VistaJuego vista, Jugador jugador){
        this.vista = vista;
        this.jugador = jugador;
-       //this.juego = fachada.agregarJugadorAlJuego(jugador);
+       this.juego = fachada.agregarJugadorAJuego(jugador);
+       //CREAR CARTONES EN BASE A LOS NUMEROS EN JUEGO
        vista.mostrarTitulo(jugador.getNombre());
        vista.mostrarSaldoJugador(jugador.getSaldo());
-       ListaPaneles paneles = this.generarPaneles();
-       vista.mostrarCartonesJugador(paneles);
+       generarConDatos(jugador);
     }
-
-    private ListaPaneles generarPaneles() {
-        int cantFilas = fachada.getCantFilasCarton();
-        int cantColumnas = fachada.getCantColumnasCarton();
-        
-        ListaPaneles listaPaneles = new ListaPaneles(cantFilas, cantColumnas);
-        for (Carton carton : jugador.getCartones()) {
-            listaPaneles.agregarPanel(carton.getMatrizCarton(), this);
+    
+    private void generarConDatos(Jugador jugador) {
+        int filas = fachada.getCantFilasCarton();
+        int columnas = fachada.getCantColumnasCarton();
+        generar(filas, columnas, jugador.getCartones());
+    }
+    
+    private void generar(int filas, int columnas, List<Carton> cartones) {       
+        ListaPaneles listaPaneles = new ListaPaneles(filas, columnas);      
+        for (Carton carton : cartones) {
+            Object[] datos = getData(carton, filas ,columnas);
+            listaPaneles.agregarPanel(datos, this);
         }
-        return listaPaneles;
+        vista.mostrarCartonesJugador(listaPaneles);
+        listaPaneles.marcar();
+    }
+    
+    public Object[] getData(Carton carton,int filas ,int columnas){
+        Object[] datos = new Object[filas * columnas];
+        int contador = 0;
+        Numero[][] matrizCarton = carton.getMatrizCarton();
+        for (int i = 0; i < columnas; i++) {
+            for (int j = 0; j < filas; j++) {
+                datos[contador] = matrizCarton[i][j];
+                contador++;
+            }
+        }
+        return datos;
     }
 
     @Override
     public boolean marcar(Object dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ((Numero)dato).getMarcado();
     }
 
     @Override
     public String getTexto(Object dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ((Numero)dato).getNumero() + "";
     }
+   
+
  }
