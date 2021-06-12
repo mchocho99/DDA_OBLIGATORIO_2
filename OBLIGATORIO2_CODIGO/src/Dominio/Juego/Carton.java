@@ -27,14 +27,17 @@ public class Carton {
         return matrizCarton;
     }
 
-    public void setMatrizCarton(int numero) {
+    public boolean setMatrizCarton(int numero) {
         for (int i = 0; i < matrizCarton.length; i++) {
             for (int j = 0; j < matrizCarton[i].length; j++) {
-                if(!matrizCarton[i][j].estaOcupado()) {
+                Numero numeroaux = matrizCarton[i][j];
+                if(numeroaux.getNumero() == -1) {
                     matrizCarton[i][j] = new Numero(numero, false);
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public int getCantNumeros() {

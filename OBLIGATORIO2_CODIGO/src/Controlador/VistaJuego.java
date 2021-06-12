@@ -8,4 +8,5 @@ public interface VistaJuego {
     public void mostrarSaldoJugador(double saldo);
     public void mostrarCartonesJugador(ListaPaneles paneles);
     public void mostrarError(String mensaje);
+    public void mostrarEstadoJuego(String estado);
 }

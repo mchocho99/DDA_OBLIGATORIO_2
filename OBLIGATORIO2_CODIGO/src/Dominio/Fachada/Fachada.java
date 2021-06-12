@@ -54,4 +54,13 @@ public class Fachada {
     public int getCantColumnasCarton() {
         return sJuego.getCantColumnasCarton();
     }
+
+    public void cargarCartones(Juego juego, Jugador jugador) {
+        sJuego.cargarCartones(juego, jugador);
+    }
+
+    public void juegoListoParaEmpezar(Juego juego) {
+        sJuego.juegoListoParaEmpezar(juego);
+    }
+
 }

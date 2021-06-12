@@ -31,7 +31,7 @@ public class Numero {
     }
    
     public boolean estaOcupado() {
-        return this.numero == -1;
+        return this.numero != -1;
     }
 
     public Jugador getJugador() {

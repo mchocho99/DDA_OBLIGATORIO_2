@@ -9,13 +9,12 @@ public class Jugador extends Usuario {
     
     private double saldo;
     private List<Carton> cartones;
-    private int cantCartones;
+    private int cantCartonesSolicitados;
 
-    public Jugador(double saldo, String cedula, String password, String nombre, int cantCartones) {
+    public Jugador(double saldo, String cedula, String password, String nombre) {
         super(cedula, password, nombre);
         this.saldo = saldo;
         this.cartones = new ArrayList<>();
-        this.cantCartones = cantCartones;
     }
     
     public double getSaldo() {
@@ -30,14 +29,22 @@ public class Jugador extends Usuario {
         this.cartones.add(carton);
     }
 
-    public int getCantCartones() {
-        return cantCartones;
+    public int getCantCartonesSolicitados() {
+        return cantCartonesSolicitados;
+    }
+
+    public void setCantCartonesSolicitados(int cantCartonesSolicitados) {
+        this.cantCartonesSolicitados = cantCartonesSolicitados;
     }
 
     public void saldoSuficiente(double valorCartones) throws ExcepcionJuego{
         if (valorCartones > this.getSaldo()) {
             throw new ExcepcionJuego("Saldo insuficiente");
         }
+    }
+    
+    public int getCantNumeros(int cantNumerosPorCarton) {
+        return cantNumerosPorCarton*cantCartonesSolicitados;
     }
     
 }

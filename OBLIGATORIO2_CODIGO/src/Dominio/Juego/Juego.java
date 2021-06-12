@@ -2,6 +2,7 @@ package Dominio.Juego;
 
 import Dominio.Usuarios.Jugador;
 import Excepciones.ExcepcionJuego;
+import Utilidades.Evento;
 import Utilidades.Observable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Juego extends Observable{
     private int numero;
     private List<Numero> numerosQueSalieron;
     private List<Numero> numerosDelJuego;
+    private List<Integer> numerosParaCarton;
     private EstadosJuego estado;
     private List<TipoFigura> figurasHabilitadas;
     private int cantMaxJugadores;
@@ -24,6 +26,7 @@ public class Juego extends Observable{
         this.numerosQueSalieron = new ArrayList<>();
         this.numero = numero;
         this.numerosDelJuego = new ArrayList<>();
+        this.numerosParaCarton = new ArrayList<>();
         this.estado = EstadosJuego.EN_ESPERA;
         this.figurasHabilitadas = figurasHabilitadas;
         this.cantMaxJugadores = cantMaxJugadores;
@@ -37,15 +40,6 @@ public class Juego extends Observable{
         if(!this.todosLosJugadores.contains(jugador)) {
             this.todosLosJugadores.add(jugador);
         }
-        if(this.todosLosJugadores.size() == this.cantMaxJugadores) {
-            //CAMBIA ESTADO SE EJECUTA UN EVENTO
-            this.setEstado(EstadosJuego.ACTIVO);      
-            setNumerosDelJuego();
-            for (Jugador jug : todosLosJugadores) {
-                this.setJugadorActivo(jug);
-            }
-        }
-        
     }
 
     public List<Jugador> getActivos() {
@@ -92,8 +86,17 @@ public class Juego extends Observable{
         return numerosDelJuego;
     }
 
-    public void setNumerosDelJuego() {
-       //EN BASE A LOS CARTONES DE TODOS LOS JUGADORES SETEA LOS NUMEROS A JUGAR
+    public void setNumerosDelJuego(int cantNumerosPorCarton) {
+        if(this.numerosDelJuego.isEmpty()) {
+            int cantNumeros = 0;
+            for (Jugador jugador : todosLosJugadores) {
+                cantNumeros += jugador.getCantNumeros(cantNumerosPorCarton);
+            }
+
+            for (int i = 1; i <= cantNumeros; i++) {
+                this.numerosDelJuego.add(new Numero(i, false));
+            }
+        }
     }
 
     public EstadosJuego getEstado() {
@@ -112,6 +115,38 @@ public class Juego extends Observable{
 
     public boolean estaEnEspera() {
         return this.getEstado() == EstadosJuego.EN_ESPERA;
+    }
+    
+    public void cargarCartones(int filasCarton, int columnasCarton, double valorCarton, Jugador jugador) {
+        //SEPARAR METODO.
+        setNumerosDelJuego(filasCarton*columnasCarton);
+        int cantCartonesJugador = jugador.getCantCartonesSolicitados();
+        for (int i = 0; i < cantCartonesJugador; i++) {
+            Carton carton = new Carton(filasCarton, columnasCarton, valorCarton);
+            int cantNumeros = filasCarton*columnasCarton;
+            for (int j = 0; j < cantNumeros; j++) {
+                int range = this.numerosDelJuego.size();
+                int numero = (int)(Math.random() * range + 1);
+                if(!this.numerosParaCarton.contains(numero)) {
+                    this.numerosParaCarton.add(numero);
+                    carton.setMatrizCarton(numero);      
+                }else {
+                    j--;
+                }
+            }
+            jugador.setCarton(carton);
+        }
+    }
+
+    public void listoParaEmpezar() {
+        if(this.todosLosJugadores.size() == this.cantMaxJugadores) {
+            this.setEstado(EstadosJuego.ACTIVO);      
+            for (Jugador jug : todosLosJugadores) {
+                this.setJugadorActivo(jug);
+            }
+            this.avisarEvento(Evento.JUEGO_ACTIVO);
+            //despues de esto sortear el primer numero.
+        }
     }
     
 }

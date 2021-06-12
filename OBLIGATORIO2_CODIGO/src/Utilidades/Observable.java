@@ -17,7 +17,7 @@ public abstract class Observable {
     }
     
     public void avisarEvento(Object evento) {
-        List<Observador> tmp = new ArrayList<Observador>(observadores);
+        List<Observador> tmp = new ArrayList<>(observadores);
         for (Observador observador : tmp) {
             observador.actualizar(evento, this);
         }

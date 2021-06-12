@@ -11,6 +11,7 @@ public class SistemaJuego {
     private List<Juego> juegos = new ArrayList();
     private Configuracion config = Configuracion.getInstancia();
     private int idJuego = 1000;
+   
 
     public List<Juego> getJuegos() {
         return juegos;
@@ -72,7 +73,16 @@ public class SistemaJuego {
         juego.setJugador(jugador);
         juego.setEstado(EstadosJuego.EN_ESPERA);
         this.idJuego++;
+        this.juegos.add(juego);
         return juego;
+    }
+
+    public void cargarCartones(Juego juego, Jugador jugador) {
+        juego.cargarCartones(config.getFilasCarton(), config.getColumnasCarton(), config.getValorCarton(), jugador);
+    }
+
+    public void juegoListoParaEmpezar(Juego juego) {
+        juego.listoParaEmpezar();
     }
     
 }

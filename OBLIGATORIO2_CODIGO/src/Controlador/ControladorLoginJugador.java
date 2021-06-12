@@ -24,6 +24,7 @@ public class ControladorLoginJugador {
                     Jugador jugador = (Jugador)usuario;
                     fachada.jugadorPerteneceABingo(jugador);
                     fachada.saldoJugadorNoSuficiente(jugador, cantCartonesInt);
+                    jugador.setCantCartonesSolicitados(cantCartonesInt);
                     vista.mostrarProximaInterfaz(jugador);
 
                 } catch (ExcepcionUsuario | ExcepcionJuego e) {

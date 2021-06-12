@@ -54,6 +54,8 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
 
         txt_EstadoJuego.setEditable(false);
         txt_EstadoJuego.setBackground(new java.awt.Color(204, 204, 204));
+        txt_EstadoJuego.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        txt_EstadoJuego.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         txt_SaldoJugador.setEditable(false);
         txt_SaldoJugador.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
@@ -75,7 +77,7 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_NumeroSorteado, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_MontoPozo, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE))
+                        .addComponent(txt_MontoPozo, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
                     .addComponent(txt_EstadoJuego, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt_SecuenciaNumSorteados, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -111,7 +113,7 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
                     .addComponent(panel_ContenedorCartones))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_SecuenciaNumSorteados, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,5 +153,10 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
     @Override
     public void mostrarError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void mostrarEstadoJuego(String estado) {
+        this.txt_EstadoJuego.setText(estado);
     }
 }
