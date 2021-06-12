@@ -8,8 +8,9 @@ public class Carton {
     private int cantNumeros;
     private double valor;
     private List<Figura> figuras;
+    private List<TipoFigura> figurasHabilitadas;
 
-    public Carton(int filasCarton, int columnasCarton, double valor) {
+    public Carton(int filasCarton, int columnasCarton, double valor, List<TipoFigura> figurasHabilitadas) {
         this.cantNumeros = filasCarton*columnasCarton;
         
         this.matrizCarton = new Numero[filasCarton][columnasCarton];
@@ -21,6 +22,8 @@ public class Carton {
         
         this.valor = valor;
         this.figuras = new ArrayList<>();
+        
+        this.figurasHabilitadas = figurasHabilitadas; 
     }
 
     public Numero[][] getMatrizCarton() {
@@ -50,5 +53,38 @@ public class Carton {
 
     public double getValor() {
         return valor;
+    }
+
+    public boolean marcarNumero(Numero numeroSorteado) {
+        for (int i = 0; i < matrizCarton.length; i++) {
+            for (int j = 0; j < matrizCarton[i].length; j++) {
+                Numero numeroaux = matrizCarton[i][j];
+                if(numeroaux.getNumero() == numeroSorteado.getNumero()) {
+                    numeroSorteado.setMarcado(true);
+                    numeroaux.setMarcado(true);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarGanador(int filas, int columnas) {
+        for (TipoFigura figura : figurasHabilitadas) {
+            return figura.completo(matrizCarton, filas, columnas);
+        }
+        return false;
+    }
+
+    public Numero getNumero(Numero numeroSorteado) {
+        for (int i = 0; i < matrizCarton.length; i++) {
+            for (int j = 0; j < matrizCarton[i].length; j++) {
+                Numero numeroaux = matrizCarton[i][j];
+                if(numeroaux.getNumero() == numeroSorteado.getNumero()) {
+                    return numeroaux;
+                }
+            }
+        }
+        return null;
     }
 }

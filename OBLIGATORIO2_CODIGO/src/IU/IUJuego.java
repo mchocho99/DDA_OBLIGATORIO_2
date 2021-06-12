@@ -2,8 +2,10 @@ package IU;
 
 import Controlador.ControladorJuego;
 import Controlador.VistaJuego;
+import Dominio.Juego.TipoFigura;
 import Dominio.Usuarios.Jugador;
 import gridLayout.ListaPaneles;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class IUJuego extends javax.swing.JDialog implements VistaJuego {
@@ -158,5 +160,12 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
     @Override
     public void mostrarEstadoJuego(String estado) {
         this.txt_EstadoJuego.setText(estado);
+    }
+
+    @Override
+    public void mostrarDatos(List<TipoFigura> figuras, List<Jugador> jugadores, int numeroActual) {
+        lst_FigurasHabilitadas.setListData(figuras.toArray());
+        lst_Jugadores.setListData(jugadores.toArray());
+        txt_NumeroSorteado.setText(Integer.toString(numeroActual));
     }
 }

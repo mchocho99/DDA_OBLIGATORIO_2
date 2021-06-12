@@ -21,6 +21,7 @@ public class ControladorJuego implements MarcadorBoton, Observador {
     private static Fachada fachada = Fachada.getInstancia();
     private Jugador jugador;
     private Juego juego;
+    private Numero numeroActual;
     
     public ControladorJuego(VistaJuego vista, Jugador jugador){
        this.vista = vista;
@@ -31,10 +32,7 @@ public class ControladorJuego implements MarcadorBoton, Observador {
        fachada.juegoListoParaEmpezar(this.juego);
        vista.mostrarTitulo(jugador.getNombre() + " " + juego.getNumero());
        vista.mostrarSaldoJugador(jugador.getSaldo());
-       
-           vista.mostrarEstadoJuego("Esperando inicio del juego...");
-           //CREAR CARTONES EN BASE A LOS NUMEROS EN JUEGO
-       
+       vista.mostrarEstadoJuego("Esperando inicio del juego...");
     }
     
     private void generarConDatos(Jugador jugador) {
@@ -79,9 +77,31 @@ public class ControladorJuego implements MarcadorBoton, Observador {
     @Override
     public void actualizar(Object evento, Observable origen) {
         if(evento == Evento.JUEGO_ACTIVO && (origen instanceof Juego)) {
-            fachada.cargarCartones(juego, jugador);
-            generarConDatos(jugador);
+            fachada.cargarCartones(juego, jugador);          
+            generarConDatos(jugador);   
+            //SORTEA DOS VECES
+            this.numeroActual = fachada.sortearNumero(this.juego);
+            mostrarDatos();
+        }     
+        if(evento == Evento.SORTEO && (origen instanceof Juego)) {
+            boolean marco = fachada.marcarNumero(this.juego, this.jugador, this.numeroActual);
+            boolean gano = false;
+            if (marco) {
+                gano = fachada.verificarGanador(this.juego, this.jugador);
+            }         
+            if (!gano) {
+               generarConDatos(jugador); 
+               mostrarDatos();
+            }
         }
+        if(evento == Evento.GANADOR && (origen instanceof Juego)) {
+        }
+    }
+
+    private void mostrarDatos() {
+        vista.mostrarDatos(this.juego.getFigurasHabilitadas(),
+                            fachada.getDemasJugadores(this.juego,this.jugador),
+                            this.numeroActual.getNumero());
     }
    
 

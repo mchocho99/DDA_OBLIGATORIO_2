@@ -1,6 +1,7 @@
 package Dominio.Usuarios;
 
 import Dominio.Juego.Carton;
+import Dominio.Juego.Numero;
 import Excepciones.ExcepcionJuego;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,5 +47,31 @@ public class Jugador extends Usuario {
     public int getCantNumeros(int cantNumerosPorCarton) {
         return cantNumerosPorCarton*cantCartonesSolicitados;
     }
+
+    public boolean marcarNumero(Numero numeroSorteado) {
+        boolean marco = false;
+        for (Carton carton : cartones) {
+            marco = carton.marcarNumero(numeroSorteado);
+            if (marco) {
+                numeroSorteado.setJugador(this);
+                carton.getNumero(numeroSorteado).setJugador(this);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarGanador(int filas, int columnas) {
+        for (Carton carton : cartones) {
+            return carton.verificarGanador(filas,columnas);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return super.getNombre();
+    }
+    
     
 }

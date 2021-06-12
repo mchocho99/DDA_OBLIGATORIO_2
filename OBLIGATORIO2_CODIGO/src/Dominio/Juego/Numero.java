@@ -7,7 +7,11 @@ public class Numero {
     private int numero;
     private boolean marcado;
     private Jugador jugador;
-   
+
+    public Numero() {
+        this.numero = -1;
+    }
+    
     public Numero(int numero, boolean marcado) {
         this.numero = numero;
         this.marcado = marcado;

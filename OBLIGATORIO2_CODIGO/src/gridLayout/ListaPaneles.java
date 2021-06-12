@@ -20,7 +20,7 @@ public class ListaPaneles extends JPanel {
 
     public void agregarPanel(Object[] datos, MarcadorBoton mb) {
         StringBuilder sb = new StringBuilder();
-        sb.append("CARTON");
+        sb.append("CARTÓN");
         agregar(datos, mb, sb.toString());
     }
 

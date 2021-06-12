@@ -16,4 +16,11 @@ public abstract class TipoFigura {
     }
     
     public abstract boolean completo(Numero[][] matrizCarton, int filas, int columnas);
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
+    
 }

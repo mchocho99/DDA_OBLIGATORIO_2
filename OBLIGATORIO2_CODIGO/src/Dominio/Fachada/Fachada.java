@@ -1,6 +1,7 @@
 package Dominio.Fachada;
 
 import Dominio.Juego.Juego;
+import Dominio.Juego.Numero;
 import Dominio.Juego.SistemaJuego;
 import Dominio.Usuarios.Administrador;
 import Dominio.Usuarios.Jugador;
@@ -8,6 +9,7 @@ import Dominio.Usuarios.SistemaUsuario;
 import Dominio.Usuarios.Usuario;
 import Excepciones.ExcepcionJuego;
 import Excepciones.ExcepcionUsuario;
+import java.util.List;
 
 public class Fachada {
     private static Fachada instancia;
@@ -61,6 +63,22 @@ public class Fachada {
 
     public void juegoListoParaEmpezar(Juego juego) {
         sJuego.juegoListoParaEmpezar(juego);
+    }
+
+    public Numero sortearNumero(Juego juego) {
+        return sJuego.sortearNumero(juego);
+    }
+
+    public boolean marcarNumero(Juego juego, Jugador jugador, Numero numeroSorteado) {
+        return sJuego.marcarNumero(juego, jugador,numeroSorteado);
+    }
+
+    public boolean verificarGanador(Juego juego, Jugador jugador) {
+        return sJuego.verificarGanador(juego, jugador);
+    }
+
+    public List<Jugador> getDemasJugadores(Juego juego,Jugador jugador) {
+        return sJuego.getDemasJugadores(juego,jugador);
     }
 
 }

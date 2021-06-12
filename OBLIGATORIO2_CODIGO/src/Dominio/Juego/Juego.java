@@ -107,6 +107,11 @@ public class Juego extends Observable{
         this.estado = estado;
     }
 
+    public List<TipoFigura> getFigurasHabilitadas() {
+        return figurasHabilitadas;
+    }
+   
+
     void jugadorPerteneceABingo(Jugador jugador) throws ExcepcionJuego{
         if (todosLosJugadores.contains(jugador)) {
             throw new ExcepcionJuego("El jugador " + jugador.getCedula() + " ya está participando del bingo");
@@ -122,7 +127,7 @@ public class Juego extends Observable{
         setNumerosDelJuego(filasCarton*columnasCarton);
         int cantCartonesJugador = jugador.getCantCartonesSolicitados();
         for (int i = 0; i < cantCartonesJugador; i++) {
-            Carton carton = new Carton(filasCarton, columnasCarton, valorCarton);
+            Carton carton = new Carton(filasCarton, columnasCarton, valorCarton, this.figurasHabilitadas);
             int cantNumeros = filasCarton*columnasCarton;
             for (int j = 0; j < cantNumeros; j++) {
                 int range = this.numerosDelJuego.size();
@@ -145,8 +150,46 @@ public class Juego extends Observable{
                 this.setJugadorActivo(jug);
             }
             this.avisarEvento(Evento.JUEGO_ACTIVO);
-            //despues de esto sortear el primer numero.
+            this.avisarEvento(Evento.SORTEO);
         }
+    }
+
+    Numero sortearNumero() {
+        int range = this.numerosDelJuego.size();
+        Numero num = new Numero();
+        boolean salio = false;
+        while(!salio){
+            int numero = (int)(Math.random() * range + 1);
+            num = new Numero(numero,false);
+            if (!this.getNumerosQueSalieron().contains(num)) {
+                this.getNumerosQueSalieron().add(num);
+                salio = true;
+            }
+        }
+        return num;
+    }
+
+    boolean marcarNumero(Jugador jugador, Numero numeroSorteado) {
+        return jugador.marcarNumero(numeroSorteado);
+    }
+
+    boolean verificarGanador(Jugador jugador, int filas, int columnas) {
+        boolean gano = jugador.verificarGanador(filas,columnas);
+        if (gano) {         
+            this.avisarEvento(Evento.GANADOR);
+            return true;
+        }
+        return false;
+    }
+
+    List<Jugador> getDemasJugadores(Jugador jugador) {
+        List<Jugador> aux = new ArrayList<>();
+        for (Jugador jugadorActivo : todosLosJugadores) {
+            if (jugador.getNombre() != jugadorActivo.getNombre()) {
+                aux.add(jugadorActivo);
+            }
+        }
+        return aux;
     }
     
 }

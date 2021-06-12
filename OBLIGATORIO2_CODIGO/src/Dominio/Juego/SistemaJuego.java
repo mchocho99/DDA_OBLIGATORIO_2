@@ -10,7 +10,7 @@ import java.util.List;
 public class SistemaJuego {
     private List<Juego> juegos = new ArrayList();
     private Configuracion config = Configuracion.getInstancia();
-    private int idJuego = 1000;
+    private int idJuego = 1;
    
 
     public List<Juego> getJuegos() {
@@ -83,6 +83,22 @@ public class SistemaJuego {
 
     public void juegoListoParaEmpezar(Juego juego) {
         juego.listoParaEmpezar();
+    }
+
+    public Numero sortearNumero(Juego juego) {
+        return juego.sortearNumero();
+    }
+
+    public boolean marcarNumero(Juego juego, Jugador jugador, Numero numeroSorteado) {
+        return juego.marcarNumero(jugador, numeroSorteado);
+    }
+
+    public boolean verificarGanador(Juego juego, Jugador jugador) {
+        return juego.verificarGanador(jugador, config.getFilasCarton(), config.getColumnasCarton());
+    }
+
+    public List<Jugador> getDemasJugadores(Juego juego,Jugador jugador) {
+        return juego.getDemasJugadores(jugador);
     }
     
 }
