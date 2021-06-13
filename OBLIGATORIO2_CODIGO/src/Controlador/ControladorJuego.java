@@ -31,7 +31,6 @@ public class ControladorJuego implements MarcadorBoton, Observador {
        this.juego.agregar(this);
        fachada.juegoListoParaEmpezar(this.juego);
        vista.mostrarTitulo(jugador.getNombre() + " " + juego.getNumero());
-       vista.mostrarSaldoJugador(jugador.getSaldo());
        vista.mostrarEstadoJuego("Esperando inicio del juego...");
     }
     
@@ -78,16 +77,15 @@ public class ControladorJuego implements MarcadorBoton, Observador {
     public void actualizar(Object evento, Observable origen) {
         if(evento == Evento.JUEGO_ACTIVO && (origen instanceof Juego)) {
             fachada.cargarCartones(juego, jugador);          
-            generarConDatos(jugador);   
-            //SORTEA DOS VECES
-            this.numeroActual = fachada.sortearNumero(this.juego);
-            mostrarDatos();
+            generarConDatos(jugador);
         }     
         if(evento == Evento.SORTEO && (origen instanceof Juego)) {
+            this.numeroActual = fachada.getNumeroActual(this.juego);
             boolean marco = fachada.marcarNumero(this.juego, this.jugador, this.numeroActual);
             boolean gano = false;
             if (marco) {
                 gano = fachada.verificarGanador(this.juego, this.jugador);
+                vista.mostrarEstadoJuego("ANOTÓ!");
             }         
             if (!gano) {
                generarConDatos(jugador); 
@@ -99,9 +97,13 @@ public class ControladorJuego implements MarcadorBoton, Observador {
     }
 
     private void mostrarDatos() {
+        String historicoNumeros = fachada.getHistoricoNumeros(juego);
         vista.mostrarDatos(this.juego.getFigurasHabilitadas(),
                             fachada.getDemasJugadores(this.juego,this.jugador),
-                            this.numeroActual.getNumero());
+                            this.numeroActual.getNumero(),
+                            fachada.getMontoPozoJuego(this.juego),
+                            jugador.getSaldo(),
+                            historicoNumeros);
     }
    
 

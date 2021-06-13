@@ -100,5 +100,17 @@ public class SistemaJuego {
     public List<Jugador> getDemasJugadores(Juego juego,Jugador jugador) {
         return juego.getDemasJugadores(jugador);
     }
+
+    public Numero getNumeroActual(Juego juego) {
+        return juego.getNumeroActual();
+    }
+
+    public double getMontoPozoJuego(Juego juego) {
+        return juego.getMontoPozoJuego(config.getValorCarton());
+    }
+
+    public String getHistoricoNumeros(Juego juego) {
+        return juego.getHistoricoNumeros();
+    }
     
 }

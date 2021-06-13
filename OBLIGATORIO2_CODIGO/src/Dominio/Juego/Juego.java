@@ -6,6 +6,7 @@ import Utilidades.Evento;
 import Utilidades.Observable;
 import java.util.ArrayList;
 import java.util.List;
+import sun.security.util.Length;
 
 public class Juego extends Observable{
     private List<Jugador> todosLosJugadores;
@@ -150,11 +151,13 @@ public class Juego extends Observable{
                 this.setJugadorActivo(jug);
             }
             this.avisarEvento(Evento.JUEGO_ACTIVO);
+            Numero numero = this.sortearNumero();
+            this.setNumerosQueSalieron(numero);
             this.avisarEvento(Evento.SORTEO);
         }
     }
 
-    Numero sortearNumero() {
+    public Numero sortearNumero() {
         int range = this.numerosDelJuego.size();
         Numero num = new Numero();
         boolean salio = false;
@@ -190,6 +193,31 @@ public class Juego extends Observable{
             }
         }
         return aux;
+    }
+
+    public Numero getNumeroActual() {
+        int largo = this.numerosQueSalieron.size();
+        return this.numerosQueSalieron.get(largo-1);
+    }
+
+    public double getMontoPozoJuego(double valorCarton) {
+        double monto = 0;
+        for (Jugador jugador : this.todosLosJugadores) {
+            monto+=jugador.getCantCartonesSolicitados()*valorCarton;
+        }
+        return monto;
+    }
+
+    public String getHistoricoNumeros() {
+        String historicoNumeros = "";
+        for (int i = this.numerosQueSalieron.size()-1; i >= 0; i--) {
+            if(i == 0) {
+                historicoNumeros += this.numerosQueSalieron.get(i).getNumero();
+            } else {
+                historicoNumeros += this.numerosQueSalieron.get(i).getNumero() + "-";
+            }
+        }
+        return historicoNumeros;
     }
     
 }

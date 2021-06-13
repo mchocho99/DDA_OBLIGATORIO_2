@@ -81,4 +81,16 @@ public class Fachada {
         return sJuego.getDemasJugadores(juego,jugador);
     }
 
+    public Numero getNumeroActual(Juego juego) {
+        return sJuego.getNumeroActual(juego);
+    }
+    
+    public double getMontoPozoJuego(Juego juego) {
+        return sJuego.getMontoPozoJuego(juego);
+    }
+
+    public String getHistoricoNumeros(Juego juego) {
+        return sJuego.getHistoricoNumeros(juego);
+    }
+
 }

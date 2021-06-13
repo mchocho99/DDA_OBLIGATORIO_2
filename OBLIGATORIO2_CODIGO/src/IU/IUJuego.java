@@ -52,7 +52,8 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
 
         txt_SecuenciaNumSorteados.setEditable(false);
         txt_SecuenciaNumSorteados.setBackground(new java.awt.Color(204, 204, 204));
-        txt_SecuenciaNumSorteados.setForeground(new java.awt.Color(204, 204, 204));
+        txt_SecuenciaNumSorteados.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
+        txt_SecuenciaNumSorteados.setForeground(new java.awt.Color(0, 0, 0));
 
         txt_EstadoJuego.setEditable(false);
         txt_EstadoJuego.setBackground(new java.awt.Color(204, 204, 204));
@@ -64,8 +65,12 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
         txt_SaldoJugador.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         txt_NumeroSorteado.setEditable(false);
+        txt_NumeroSorteado.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
+        txt_NumeroSorteado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         txt_MontoPozo.setEditable(false);
+        txt_MontoPozo.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
+        txt_MontoPozo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,12 +146,7 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
     public void mostrarTitulo(String titulo) {
         this.setTitle(titulo);
     }
-
-    @Override
-    public void mostrarSaldoJugador(double saldo) {
-        this.txt_SaldoJugador.setText(Double.toString(saldo));
-    }
-
+    
     @Override
     public void mostrarCartonesJugador(ListaPaneles paneles) {
         panel_ContenedorCartones.setViewportView(paneles);
@@ -163,9 +163,14 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
     }
 
     @Override
-    public void mostrarDatos(List<TipoFigura> figuras, List<Jugador> jugadores, int numeroActual) {
-        lst_FigurasHabilitadas.setListData(figuras.toArray());
-        lst_Jugadores.setListData(jugadores.toArray());
-        txt_NumeroSorteado.setText(Integer.toString(numeroActual));
+    public void mostrarDatos(List<TipoFigura> figuras, List<Jugador> jugadores,
+            int numeroActual, double montoPozoJuego, double saldoJugador,
+            String historicoNumeros) {
+        this.lst_FigurasHabilitadas.setListData(figuras.toArray());
+        this.lst_Jugadores.setListData(jugadores.toArray());
+        this.txt_NumeroSorteado.setText(Integer.toString(numeroActual));
+        this.txt_SaldoJugador.setText(Double.toString(saldoJugador));
+        this.txt_MontoPozo.setText(Double.toString(montoPozoJuego));
+        this.txt_SecuenciaNumSorteados.setText(historicoNumeros);
     }
 }
