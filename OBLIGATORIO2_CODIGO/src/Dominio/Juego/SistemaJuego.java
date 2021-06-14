@@ -112,5 +112,10 @@ public class SistemaJuego {
     public String getHistoricoNumeros(Juego juego) {
         return juego.getHistoricoNumeros();
     }
+
+    public void seguirJugando(Juego juego, Jugador jugador) {
+        juego.seguirJugando(jugador);
+    }
+
     
 }

@@ -5,12 +5,12 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class Boton extends JTextField {
+public class Casilla extends JTextField {
 
     private Object dato;
-    private MarcadorBoton marcador;
+    private MarcadorCasilla marcador;
 
-    public Boton(Object dato, MarcadorBoton marcador) {
+    public Casilla(Object dato, MarcadorCasilla marcador) {
         setFont(new Font("Tahoma", 1, 18));
         this.dato = dato;
         this.marcador = marcador;

@@ -7,16 +7,16 @@ import javax.swing.JPanel;
 
 public class PanelConTitulo extends JPanel {
     
-    public PanelConTitulo(String titulo, PanelBotones pb) {
+    public PanelConTitulo(String titulo, PanelCasillas pc) {
         setLayout(new BorderLayout());
         JLabel lb = new JLabel(titulo);
         lb.setFont(new Font("Tahoma", 1 , 18));
         lb.setHorizontalAlignment(JLabel.CENTER);
         add(lb, BorderLayout.NORTH);
-        add(pb, BorderLayout.CENTER);
+        add(pc, BorderLayout.CENTER);
     }
 
     void marcar() {
-        ((PanelBotones)getComponent(1)).marcar();
+        ((PanelCasillas)getComponent(1)).marcar();
     }
 }

@@ -182,7 +182,9 @@ public class IULoginAdministrador extends javax.swing.JDialog implements VistaLo
 
     @Override
     public void mostrarProximaInterfaz(Usuario usuario) {
-        JOptionPane.showMessageDialog(this, "Hola" + usuario.getCedula(), "GOOOOOD", JOptionPane.OK_OPTION);
+        IUMonitoreo ventanaMonitoreo = new IUMonitoreo(null, false);
+        ventanaMonitoreo.setVisible(true);
+        ventanaMonitoreo.setLocationRelativeTo(this);
     }
 
     @Override
