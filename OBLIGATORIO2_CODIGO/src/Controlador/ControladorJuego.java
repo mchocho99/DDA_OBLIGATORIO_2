@@ -11,11 +11,11 @@ import Utilidades.Evento;
 import Utilidades.Observable;
 import Utilidades.Observador;
 import gridLayout.ListaPaneles;
-import gridLayout.MarcadorBoton;
+import gridLayout.MarcadorCasilla;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class ControladorJuego implements MarcadorBoton, Observador {
+public class ControladorJuego implements MarcadorCasilla, Observador {
 
     private VistaJuego vista;
     private static Fachada fachada = Fachada.getInstancia();
@@ -29,9 +29,9 @@ public class ControladorJuego implements MarcadorBoton, Observador {
        
        this.juego = fachada.agregarJugadorAJuego(jugador);
        this.juego.agregar(this);
+       vista.mostrarEstadoJuego("Esperando inicio del juego...");
        fachada.juegoListoParaEmpezar(this.juego);
        vista.mostrarTitulo(jugador.getNombre() + " " + juego.getNumero());
-       vista.mostrarEstadoJuego("Esperando inicio del juego...");
     }
     
     private void generarConDatos(Jugador jugador) {
@@ -86,6 +86,8 @@ public class ControladorJuego implements MarcadorBoton, Observador {
             if (marco) {
                 gano = fachada.verificarGanador(this.juego, this.jugador);
                 vista.mostrarEstadoJuego("ANOTÓ!");
+            }else {
+                vista.mostrarEstadoJuego("NO ANOTÓ!");
             }         
             if (!gano) {
                generarConDatos(jugador); 
@@ -93,6 +95,7 @@ public class ControladorJuego implements MarcadorBoton, Observador {
             }
         }
         if(evento == Evento.GANADOR && (origen instanceof Juego)) {
+            vista.mostrarEstadoJuego("gano");
         }
     }
 
@@ -104,6 +107,11 @@ public class ControladorJuego implements MarcadorBoton, Observador {
                             fachada.getMontoPozoJuego(this.juego),
                             jugador.getSaldo(),
                             historicoNumeros);
+    }
+
+    public void seguirJugando() {
+        vista.mostrarEstadoJuego("Esperando...");
+        fachada.seguirJugando(juego, jugador);
     }
    
 

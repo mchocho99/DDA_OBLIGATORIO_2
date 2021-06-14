@@ -18,17 +18,17 @@ public class ListaPaneles extends JPanel {
         gridLayout.setColumns(columnas);
     }
 
-    public void agregarPanel(Object[] datos, MarcadorBoton mb) {
+    public void agregarPanel(Object[] datos, MarcadorCasilla mc) {
         StringBuilder sb = new StringBuilder();
         sb.append("CARTÓN");
-        agregar(datos, mb, sb.toString());
+        agregar(datos, mc, sb.toString());
     }
 
-    private void agregar(Object[] datos, MarcadorBoton mb, String titulo) {
+    private void agregar(Object[] datos, MarcadorCasilla mc, String titulo) {
         gridLayout.setRows(gridLayout.getRows() + 1);
-        PanelBotones pb = new PanelBotones(filas, columnas);
-        pb.cargar(datos, mb);
-        add(new PanelConTitulo(titulo, pb));
+        PanelCasillas pc = new PanelCasillas(filas, columnas);
+        pc.cargar(datos, mc);
+        add(new PanelConTitulo(titulo, pc));
     }
 
     public void marcar() {
@@ -42,10 +42,10 @@ public class ListaPaneles extends JPanel {
         Component[] lista = getComponents();
         for (Component c : lista) {
             PanelConTitulo pt = ((PanelConTitulo)c);
-            PanelBotones pb = (PanelBotones)pt.getComponent(1);
-            Component[] listaBotones = pb.getComponents();
-            for (Component cB : listaBotones) {
-                ((Boton)c).marcar();
+            PanelCasillas pc = (PanelCasillas)pt.getComponent(1);
+            Component[] listaCasillas = pc.getComponents();
+            for (Component cB : listaCasillas) {
+                ((Casilla)c).marcar();
             }
         }
     }

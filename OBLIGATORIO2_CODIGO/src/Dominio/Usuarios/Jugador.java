@@ -11,11 +11,13 @@ public class Jugador extends Usuario {
     private double saldo;
     private List<Carton> cartones;
     private int cantCartonesSolicitados;
+    private boolean listo;
 
     public Jugador(double saldo, String cedula, String password, String nombre) {
         super(cedula, password, nombre);
         this.saldo = saldo;
         this.cartones = new ArrayList<>();
+        this.listo = false;
     }
     
     public double getSaldo() {
@@ -36,6 +38,14 @@ public class Jugador extends Usuario {
 
     public void setCantCartonesSolicitados(int cantCartonesSolicitados) {
         this.cantCartonesSolicitados = cantCartonesSolicitados;
+    }
+
+    public boolean getListo() {
+        return listo;
+    }
+
+    public void setListo(boolean listo) {
+        this.listo = listo;
     }
 
     public void saldoSuficiente(double valorCartones) throws ExcepcionJuego{

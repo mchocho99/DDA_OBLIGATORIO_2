@@ -45,4 +45,11 @@ public class Numero {
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((Numero)obj).getNumero() == this.numero;
+    }
+    
+    
 }

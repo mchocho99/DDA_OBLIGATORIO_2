@@ -47,6 +47,11 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
         jScrollPane2.setViewportView(lst_FigurasHabilitadas);
 
         btn_SeguirJugando.setText("Seguir jugando");
+        btn_SeguirJugando.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SeguirJugandoActionPerformed(evt);
+            }
+        });
 
         btn_Abandonar.setText("Abandonar");
 
@@ -125,6 +130,10 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_SeguirJugandoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SeguirJugandoActionPerformed
+        controlador.seguirJugando();
+    }//GEN-LAST:event_btn_SeguirJugandoActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

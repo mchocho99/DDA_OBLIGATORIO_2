@@ -93,4 +93,12 @@ public class Fachada {
         return sJuego.getHistoricoNumeros(juego);
     }
 
+    public void seguirJugando(Juego juego, Jugador jugador) {
+        sJuego.seguirJugando(juego, jugador);
+    }
+
+    public List<Juego> getJuegos() {
+        return sJuego.getJuegos();
+    }
+
 }

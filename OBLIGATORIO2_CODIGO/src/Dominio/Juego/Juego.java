@@ -152,7 +152,6 @@ public class Juego extends Observable{
             }
             this.avisarEvento(Evento.JUEGO_ACTIVO);
             Numero numero = this.sortearNumero();
-            this.setNumerosQueSalieron(numero);
             this.avisarEvento(Evento.SORTEO);
         }
     }
@@ -219,5 +218,34 @@ public class Juego extends Observable{
         }
         return historicoNumeros;
     }
+
+    public void seguirJugando(Jugador jugador) {
+        jugador.setListo(true);
+        int listos = 0;
+        int largoActivos = this.activos.size();
+        for (Jugador unJ : this.activos) {
+            if(unJ.getListo()) {
+                listos++;
+            }
+        }
+        if(listos == largoActivos) {
+            Numero numeroSorteado = this.sortearNumero();
+            this.volverJugadoresANoListo();
+            this.avisarEvento(Evento.SORTEO);
+        }
+    }
+
+    private void volverJugadoresANoListo() {
+        for (Jugador jugador : this.activos) {
+            jugador.setListo(false);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return  numero + " - " + estado;
+    }
+    
+    
     
 }
