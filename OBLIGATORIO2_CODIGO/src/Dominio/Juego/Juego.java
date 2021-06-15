@@ -6,7 +6,6 @@ import Utilidades.Evento;
 import Utilidades.Observable;
 import java.util.ArrayList;
 import java.util.List;
-import sun.security.util.Length;
 
 public class Juego extends Observable{
     private List<Jugador> todosLosJugadores;
@@ -20,6 +19,7 @@ public class Juego extends Observable{
     private EstadosJuego estado;
     private List<TipoFigura> figurasHabilitadas;
     private int cantMaxJugadores;
+    private Jugador ganador;
     
     public Juego(int numero, List<TipoFigura> figurasHabilitadas, int cantMaxJugadores) {
         this.todosLosJugadores = new ArrayList<>();
@@ -31,6 +31,7 @@ public class Juego extends Observable{
         this.estado = EstadosJuego.EN_ESPERA;
         this.figurasHabilitadas = figurasHabilitadas;
         this.cantMaxJugadores = cantMaxJugadores;
+        this.ganador = null;
     }
 
     public List<Jugador> getTodosLosJugadores() {
@@ -123,6 +124,10 @@ public class Juego extends Observable{
         return this.getEstado() == EstadosJuego.EN_ESPERA;
     }
     
+     public Jugador getGanador() {
+        return ganador;
+    }
+    
     public void cargarCartones(int filasCarton, int columnasCarton, double valorCarton, Jugador jugador) {
         //SEPARAR METODO.
         setNumerosDelJuego(filasCarton*columnasCarton);
@@ -177,8 +182,9 @@ public class Juego extends Observable{
 
     boolean verificarGanador(Jugador jugador, int filas, int columnas) {
         boolean gano = jugador.verificarGanador(filas,columnas);
-        if (gano) {         
-            this.avisarEvento(Evento.GANADOR);
+        if (gano) {     
+            this.ganador = jugador;        
+            this.avisarEvento(Evento.GANADOR);           
             return true;
         }
         return false;
@@ -245,6 +251,8 @@ public class Juego extends Observable{
     public String toString() {
         return  numero + " - " + estado;
     }
+
+   
     
     
     

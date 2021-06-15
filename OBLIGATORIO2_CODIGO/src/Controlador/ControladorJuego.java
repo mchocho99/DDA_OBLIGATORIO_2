@@ -31,7 +31,7 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
        this.juego.agregar(this);
        vista.mostrarEstadoJuego("Esperando inicio del juego...");
        fachada.juegoListoParaEmpezar(this.juego);
-       vista.mostrarTitulo(jugador.getNombre() + " " + juego.getNumero());
+       vista.mostrarTitulo("JUGADOR: " + jugador.getNombre() + " JUEGO N°: " + juego.getNumero());
     }
     
     private void generarConDatos(Jugador jugador) {
@@ -85,7 +85,9 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
             boolean gano = false;
             if (marco) {
                 gano = fachada.verificarGanador(this.juego, this.jugador);
-                vista.mostrarEstadoJuego("ANOTÓ!");
+                if (!gano) {
+                    vista.mostrarEstadoJuego("ANOTÓ!");   
+                }
             }else {
                 vista.mostrarEstadoJuego("NO ANOTÓ!");
             }         
@@ -95,9 +97,14 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
             }
         }
         if(evento == Evento.GANADOR && (origen instanceof Juego)) {
-            vista.mostrarEstadoJuego("gano");
+            //MUESTRA EN UNA SOLA PESTAÑA EL GANADOR
+           Jugador ganador = fachada.getGanador(this.juego);
+           String figuraGanadora = fachada.getNombreFigura(ganador);
+           generarConDatos(jugador); 
+           vista.mostrarEstadoJuego("EL JUGADOR: " + ganador.getNombre() + " GANÓ CON LA FIGURA: " + figuraGanadora);
         }
     }
+    
 
     private void mostrarDatos() {
         String historicoNumeros = fachada.getHistoricoNumeros(juego);

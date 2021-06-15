@@ -101,4 +101,12 @@ public class Fachada {
         return sJuego.getJuegos();
     }
 
+    public Jugador getGanador(Juego juego) {
+        return sJuego.getGanador(juego);
+    }
+
+    public String getNombreFigura(Jugador ganador) {
+        return sJuego.getNombreFigura(ganador);
+    }
+
 }

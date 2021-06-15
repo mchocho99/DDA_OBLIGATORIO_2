@@ -1,6 +1,6 @@
 package Dominio.Juego;
 
-public abstract class Figura {
+public class Figura {
     private TipoFigura tipo;
 
     public Figura(TipoFigura tipo) {
@@ -10,4 +10,9 @@ public abstract class Figura {
     public TipoFigura getTipoFigura() {
         return tipo;
     }
+    
+    public String getNombreFigura() {
+        return tipo.getNombre();
+    }
+    
 }

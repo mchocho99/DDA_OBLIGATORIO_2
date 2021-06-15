@@ -1,13 +1,12 @@
 package Dominio.Juego;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Carton {
     private Numero[][] matrizCarton;
     private int cantNumeros;
     private double valor;
-    private List<Figura> figuras;
+    private Figura figura;
     private List<TipoFigura> figurasHabilitadas;
 
     public Carton(int filasCarton, int columnasCarton, double valor, List<TipoFigura> figurasHabilitadas) {
@@ -21,7 +20,7 @@ public class Carton {
         }
         
         this.valor = valor;
-        this.figuras = new ArrayList<>();
+        this.figura = null;
         
         this.figurasHabilitadas = figurasHabilitadas; 
     }
@@ -70,8 +69,18 @@ public class Carton {
     }
 
     public boolean verificarGanador(int filas, int columnas) {
+        Figura aux = null;
+        Double valor = -1.0;
         for (TipoFigura figura : figurasHabilitadas) {
-            return figura.completo(matrizCarton, filas, columnas);
+            boolean gano = figura.completo(matrizCarton, filas, columnas);
+            if (gano && figura.getValor() > valor) {
+                aux = new Figura(figura);
+                valor = figura.getValor();
+            }
+        }
+        if (aux != null) {
+            this.setFigura(aux);
+            return true;
         }
         return false;
     }
@@ -87,4 +96,14 @@ public class Carton {
         }
         return null;
     }
+
+    public String getNombreFigura() {
+        return this.figura.getNombreFigura();
+    }
+
+    public void setFigura(Figura figura) {
+        this.figura = figura;
+    }
+    
+    
 }

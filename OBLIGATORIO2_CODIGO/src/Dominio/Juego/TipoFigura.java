@@ -2,6 +2,7 @@ package Dominio.Juego;
 
 public abstract class TipoFigura {
     private String nombre;
+    private double valor;
 
     public TipoFigura(String nombre) {
         this.nombre = nombre;
@@ -20,6 +21,10 @@ public abstract class TipoFigura {
     @Override
     public String toString() {
         return nombre;
+    }
+    
+    public double getValor() {
+        return valor;
     }
     
     

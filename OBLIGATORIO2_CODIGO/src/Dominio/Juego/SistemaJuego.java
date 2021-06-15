@@ -117,5 +117,12 @@ public class SistemaJuego {
         juego.seguirJugando(jugador);
     }
 
-    
+    public Jugador getGanador(Juego juego) {
+        return juego.getGanador();
+    }
+
+    public String getNombreFigura(Jugador ganador) {
+        return ganador.getNombreFigura();
+    }
+   
 }

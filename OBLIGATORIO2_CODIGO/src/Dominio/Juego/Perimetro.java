@@ -24,14 +24,14 @@ public class Perimetro extends TipoFigura {
         
         for (int i = 0; i < filas; i++) {
             //linea vertical der.
-            if(!matrizCarton[i][filas].getMarcado()) {
+            if(!matrizCarton[i][columnas-1].getMarcado()) {
                 return false;
             }
         }
         
         for (int i = 0; i < columnas; i++) {
             //ultima linea horizontal.
-            if(!matrizCarton[columnas][i].getMarcado()) {
+            if(!matrizCarton[filas-1][i].getMarcado()) {
                 return false;
             }
         }

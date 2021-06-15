@@ -82,6 +82,15 @@ public class Jugador extends Usuario {
     public String toString() {
         return super.getNombre();
     }
+
+    public String getNombreFigura() {
+        for (Carton carton : cartones) {
+            if (carton.getNombreFigura() != null) {
+                return carton.getNombreFigura();
+            }
+        }
+        return null;
+    }
     
     
 }

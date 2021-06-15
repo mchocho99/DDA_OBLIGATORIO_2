@@ -44,5 +44,21 @@ public class Precarga {
         fachada.agregarUsuario(admin1);   
         fachada.agregarUsuario(jugador1);
         fachada.agregarUsuario(jugador2);
+        
+        fachada.agregarUsuario(jugador3);
+        fachada.agregarUsuario(jugador4);
+        
+//        Carton carton = new Carton(3, 4, 100, null);
+//        carton.getMatrizCarton()[0][0].setMarcado(true);
+//        carton.getMatrizCarton()[0][1].setMarcado(true);
+//        carton.getMatrizCarton()[0][2].setMarcado(true);
+//        carton.getMatrizCarton()[0][3].setMarcado(true);
+//        carton.getMatrizCarton()[1][0].setMarcado(true);
+//        carton.getMatrizCarton()[1][3].setMarcado(true);
+//        carton.getMatrizCarton()[2][0].setMarcado(true);
+//        carton.getMatrizCarton()[2][1].setMarcado(true);
+//        carton.getMatrizCarton()[2][2].setMarcado(true);
+//        carton.getMatrizCarton()[2][3].setMarcado(true);
+//        perimetro.completo(carton.getMatrizCarton(), 3, 4);
     }
 }
