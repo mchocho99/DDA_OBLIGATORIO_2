@@ -201,7 +201,7 @@ public class Juego extends Observable{
     public List<Jugador> getDemasJugadores(Jugador jugador) {
         List<Jugador> aux = new ArrayList<>();
         for (Jugador jugadorActivo : this.activos) {
-            if (!jugador.getNombre().endsWith(jugadorActivo.getNombre())) {
+            if (!jugador.getNombre().equals(jugadorActivo.getNombre())) {
                 aux.add(jugadorActivo);
             }
         }
@@ -294,4 +294,6 @@ public class Juego extends Observable{
     private void setGanador(Jugador jugador) {
         this.ganador = jugador;
     }  
+    
+    
 }
