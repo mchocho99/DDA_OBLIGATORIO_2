@@ -1,6 +1,7 @@
 package Dominio.Usuarios;
 
 import Dominio.Juego.Carton;
+import Dominio.Juego.Figura;
 import Dominio.Juego.Numero;
 import Excepciones.ExcepcionJuego;
 import java.util.ArrayList;
@@ -24,6 +25,11 @@ public class Jugador extends Usuario {
         return saldo;
     }
 
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    
     public List<Carton> getCartones() {
         return cartones;
     }
@@ -87,6 +93,46 @@ public class Jugador extends Usuario {
         for (Carton carton : cartones) {
             if (carton.getNombreFigura() != null) {
                 return carton.getNombreFigura();
+            }
+        }
+        return null;
+    }
+
+    public double getMontoADebitar(double valorCarton, double extra) {
+        double montoADebitar = this.cantCartonesSolicitados * valorCarton;
+        return montoADebitar + (montoADebitar * extra);
+    }
+
+    public void pagar(double montoADebitar) {
+        this.saldo -= montoADebitar;
+    }
+
+    public void cobrar(double montoACobrar) {
+        this.saldo += montoACobrar;
+    }
+
+    public Figura getFigura(Jugador ganador) {
+        for (Carton carton : cartones) {
+            if (carton.getFigura() != null) {
+                return carton.getFigura();
+            }
+        }
+        return null;
+    }
+
+    public double getExtraFigura() {
+        for (Carton carton : cartones) {
+            if (carton.getFigura() != null) {
+                return carton.getExtraFigura();
+            }
+        }
+        return 0.0;
+    }
+
+    public String getNombreFiguraGanadora() {
+        for (Carton carton : cartones) {
+            if (carton.getFigura() != null) {
+                return carton.getNombreFiguraGanadora();
             }
         }
         return null;

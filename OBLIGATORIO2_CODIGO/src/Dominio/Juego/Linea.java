@@ -2,8 +2,8 @@ package Dominio.Juego;
 
 public class Linea extends TipoFigura {
 
-    public Linea(String nombre) {
-        super(nombre);
+    public Linea(String nombre, double valor) {
+        super(nombre, valor);
     }
     
     @Override

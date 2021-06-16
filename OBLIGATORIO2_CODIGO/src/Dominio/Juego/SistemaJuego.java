@@ -94,7 +94,7 @@ public class SistemaJuego {
     }
 
     public boolean verificarGanador(Juego juego, Jugador jugador) {
-        return juego.verificarGanador(jugador, config.getFilasCarton(), config.getColumnasCarton());
+        return juego.verificarGanador(config.getValorCarton(), jugador, config.getFilasCarton(), config.getColumnasCarton());
     }
 
     public List<Jugador> getDemasJugadores(Juego juego,Jugador jugador) {
@@ -124,5 +124,23 @@ public class SistemaJuego {
     public String getNombreFigura(Jugador ganador) {
         return ganador.getNombreFigura();
     }
-   
+    
+    public void abandonar(Juego juego, Jugador jugador) {
+        if(juego.tieneJugadores()) {
+            juego.abandonar(config.getValorCarton(), jugador);
+        }
+    }
+
+    public double getMontoADebitar(Jugador jugador, double extra) {
+        return jugador.getMontoADebitar(config.getValorCarton(), extra);
+    }
+
+    public void eliminarJuego(Juego juego) {
+        this.juegos.remove(juego);
+        juego = null;
+    }
+
+    public String getNombreFiguraGanadora(Jugador ganador) {
+        return ganador.getNombreFiguraGanadora();
+    }
 }

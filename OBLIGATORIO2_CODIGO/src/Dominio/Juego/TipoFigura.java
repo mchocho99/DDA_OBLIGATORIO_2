@@ -4,8 +4,9 @@ public abstract class TipoFigura {
     private String nombre;
     private double valor;
 
-    public TipoFigura(String nombre) {
+    public TipoFigura(String nombre, double valor) {
         this.nombre = nombre;
+        this.valor = valor;
     }
 
     public String getNombre() {

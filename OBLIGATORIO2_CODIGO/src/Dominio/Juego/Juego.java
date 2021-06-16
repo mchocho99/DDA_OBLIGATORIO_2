@@ -129,23 +129,25 @@ public class Juego extends Observable{
     }
     
     public void cargarCartones(int filasCarton, int columnasCarton, double valorCarton, Jugador jugador) {
-        //SEPARAR METODO.
-        setNumerosDelJuego(filasCarton*columnasCarton);
+        this.setNumerosDelJuego(filasCarton*columnasCarton);
         int cantCartonesJugador = jugador.getCantCartonesSolicitados();
         for (int i = 0; i < cantCartonesJugador; i++) {
             Carton carton = new Carton(filasCarton, columnasCarton, valorCarton, this.figurasHabilitadas);
-            int cantNumeros = filasCarton*columnasCarton;
-            for (int j = 0; j < cantNumeros; j++) {
-                int range = this.numerosDelJuego.size();
-                int numero = (int)(Math.random() * range + 1);
-                if(!this.numerosParaCarton.contains(numero)) {
-                    this.numerosParaCarton.add(numero);
-                    carton.setMatrizCarton(numero);      
-                }else {
-                    j--;
-                }
-            }
+            this.cargarCarton(carton, filasCarton*columnasCarton);
             jugador.setCarton(carton);
+        }
+    }
+    
+    private void cargarCarton(Carton carton, int cantNumeros) {
+        for (int j = 0; j < cantNumeros; j++) {
+            int range = this.numerosDelJuego.size();
+            int numero = (int)(Math.random() * range + 1);
+            if(!this.numerosParaCarton.contains(numero)) {
+                this.numerosParaCarton.add(numero);
+                carton.setMatrizCarton(numero);      
+            }else {
+                j--;
+            }
         }
     }
 
@@ -176,24 +178,30 @@ public class Juego extends Observable{
         return num;
     }
 
-    boolean marcarNumero(Jugador jugador, Numero numeroSorteado) {
-        return jugador.marcarNumero(numeroSorteado);
+    public boolean marcarNumero(Jugador jugador, Numero numeroSorteado) {
+        if(this.activos.contains(jugador)) {
+            return jugador.marcarNumero(numeroSorteado);
+        }
+        return false;
     }
 
-    boolean verificarGanador(Jugador jugador, int filas, int columnas) {
+    public boolean verificarGanador(double valorCarton, Jugador jugador, int filas, int columnas) {
         boolean gano = jugador.verificarGanador(filas,columnas);
         if (gano) {     
-            this.ganador = jugador;        
+            this.setGanador(jugador);
+            double montoACobrar = this.cobrar(valorCarton, this.ganador, this.ganador.getExtraFigura());
+            this.ganador.cobrar(montoACobrar);
+            this.setEstado(EstadosJuego.TERMINO);
             this.avisarEvento(Evento.GANADOR);           
             return true;
         }
         return false;
     }
 
-    List<Jugador> getDemasJugadores(Jugador jugador) {
+    public List<Jugador> getDemasJugadores(Jugador jugador) {
         List<Jugador> aux = new ArrayList<>();
-        for (Jugador jugadorActivo : todosLosJugadores) {
-            if (jugador.getNombre() != jugadorActivo.getNombre()) {
+        for (Jugador jugadorActivo : this.activos) {
+            if (!jugador.getNombre().endsWith(jugadorActivo.getNombre())) {
                 aux.add(jugadorActivo);
             }
         }
@@ -252,8 +260,38 @@ public class Juego extends Observable{
         return  numero + " - " + estado;
     }
 
-   
+    public void abandonar(double valorCarton, Jugador jugador) {
+        this.activos.remove(jugador);
+        this.avisarEvento(Evento.ABANDONO);
+        if(this.activos.size() == 1) {
+            if(this.getEstado() == EstadosJuego.ACTIVO) {
+                this.setGanador(this.activos.get(0));
+                double montoACobrar = this.cobrar(valorCarton, this.ganador, 0.0);
+                this.ganador.cobrar(montoACobrar);
+                this.activos.clear();              
+                this.setEstado(EstadosJuego.TERMINO);
+                this.avisarEvento(Evento.GANADOR);
+            }
+        }
+    }
     
+    public double cobrar(double valorCarton, Jugador jugador, double extra) {
+        double monto = 0.0;
+        for (Jugador unJ : todosLosJugadores) {
+            if(unJ!=jugador) {
+                double montoADebitar = unJ.getMontoADebitar(valorCarton, extra);
+                monto += montoADebitar;
+                unJ.pagar(montoADebitar);
+            }
+        }
+        return monto;
+    }
     
-    
+    public boolean tieneJugadores() {
+        return this.todosLosJugadores.size() > 0;
+    }
+
+    private void setGanador(Jugador jugador) {
+        this.ganador = jugador;
+    }  
 }

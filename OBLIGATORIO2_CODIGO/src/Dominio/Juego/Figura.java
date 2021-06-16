@@ -14,5 +14,9 @@ public class Figura {
     public String getNombreFigura() {
         return tipo.getNombre();
     }
+
+    public double getExtra() {
+        return tipo.getValor();
+    }
     
 }

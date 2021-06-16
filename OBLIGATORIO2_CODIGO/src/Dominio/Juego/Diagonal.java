@@ -2,8 +2,8 @@ package Dominio.Juego;
 
 public class Diagonal extends TipoFigura {
 
-    public Diagonal(String nombre) {
-        super(nombre);
+    public Diagonal(String nombre, double valor) {
+        super(nombre, valor);
     }
     
     @Override

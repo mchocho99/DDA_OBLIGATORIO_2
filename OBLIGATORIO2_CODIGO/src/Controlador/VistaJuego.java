@@ -14,4 +14,6 @@ public interface VistaJuego {
     public void mostrarDatos(List<TipoFigura> figuras, List<Jugador> jugadores, 
             int numeroActual, double montoPozoJuego, double saldoJugador,
             String historicoNumeros);
+    public void cerrar();
+    public void desactivarBotonSeguirJugando();
 }

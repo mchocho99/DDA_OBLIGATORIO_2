@@ -98,11 +98,26 @@ public class Carton {
     }
 
     public String getNombreFigura() {
+        if(this.figura == null) {
+            return null;
+        }
         return this.figura.getNombreFigura();
     }
 
     public void setFigura(Figura figura) {
         this.figura = figura;
+    }
+
+    public Figura getFigura() {
+        return this.figura;
+    }
+
+    public double getExtraFigura() {
+        return this.figura.getExtra();
+    }
+
+    public String getNombreFiguraGanadora() {
+        return this.figura.getNombreFigura();
     }
     
     

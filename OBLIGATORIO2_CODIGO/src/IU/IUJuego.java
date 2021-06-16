@@ -41,6 +41,11 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
         txt_MontoPozo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(lst_Jugadores);
 
@@ -54,6 +59,11 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
         });
 
         btn_Abandonar.setText("Abandonar");
+        btn_Abandonar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AbandonarActionPerformed(evt);
+            }
+        });
 
         txt_SecuenciaNumSorteados.setEditable(false);
         txt_SecuenciaNumSorteados.setBackground(new java.awt.Color(204, 204, 204));
@@ -134,6 +144,15 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
     private void btn_SeguirJugandoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SeguirJugandoActionPerformed
         controlador.seguirJugando();
     }//GEN-LAST:event_btn_SeguirJugandoActionPerformed
+
+    private void btn_AbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbandonarActionPerformed
+        controlador.abandonar();
+        this.dispose();
+    }//GEN-LAST:event_btn_AbandonarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        controlador.abandonar();
+    }//GEN-LAST:event_formWindowClosed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -181,5 +200,15 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
         this.txt_SaldoJugador.setText(Double.toString(saldoJugador));
         this.txt_MontoPozo.setText(Double.toString(montoPozoJuego));
         this.txt_SecuenciaNumSorteados.setText(historicoNumeros);
+    }
+
+    @Override
+    public void cerrar() {
+        this.dispose();
+    }
+
+    @Override
+    public void desactivarBotonSeguirJugando() {
+        this.btn_SeguirJugando.setEnabled(false);
     }
 }

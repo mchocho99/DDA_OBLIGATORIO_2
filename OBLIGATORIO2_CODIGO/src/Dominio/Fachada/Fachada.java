@@ -1,5 +1,6 @@
 package Dominio.Fachada;
 
+import Dominio.Juego.Figura;
 import Dominio.Juego.Juego;
 import Dominio.Juego.Numero;
 import Dominio.Juego.SistemaJuego;
@@ -105,8 +106,19 @@ public class Fachada {
         return sJuego.getGanador(juego);
     }
 
-    public String getNombreFigura(Jugador ganador) {
-        return sJuego.getNombreFigura(ganador);
+    public void abandonar(Juego juego, Jugador jugador) {
+        sJuego.abandonar(juego, jugador);
     }
 
+    public double getMontoADebitar(Jugador jugador, double extra) {
+        return sJuego.getMontoADebitar(jugador, extra);
+    }
+
+    public void eliminarJuego(Juego juego) {
+        sJuego.eliminarJuego(juego);
+    }
+
+    public String getNombreFiguraGanadora(Jugador ganador) {
+        return sJuego.getNombreFiguraGanadora(ganador);
+    }
 }

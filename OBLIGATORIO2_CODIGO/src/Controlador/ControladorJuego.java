@@ -3,6 +3,7 @@ package Controlador;
 import Dominio.Fachada.Fachada;
 import Dominio.Juego.Carton;
 import Dominio.Juego.EstadosJuego;
+import Dominio.Juego.Figura;
 import Dominio.Juego.Juego;
 import Dominio.Juego.Numero;
 import Dominio.Usuarios.Jugador;
@@ -20,12 +21,14 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
     private VistaJuego vista;
     private static Fachada fachada = Fachada.getInstancia();
     private Jugador jugador;
+    private double saldoActual;
     private Juego juego;
     private Numero numeroActual;
     
     public ControladorJuego(VistaJuego vista, Jugador jugador){
        this.vista = vista;
        this.jugador = jugador;
+       this.saldoActual = jugador.getSaldo() - fachada.getMontoADebitar(jugador, 0.0);
        
        this.juego = fachada.agregarJugadorAJuego(jugador);
        this.juego.agregar(this);
@@ -88,20 +91,28 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
                 if (!gano) {
                     vista.mostrarEstadoJuego("ANOTÓ!");   
                 }
-            }else {
-                vista.mostrarEstadoJuego("NO ANOTÓ!");
-            }         
+            }
             if (!gano) {
                generarConDatos(jugador); 
                mostrarDatos();
             }
         }
         if(evento == Evento.GANADOR && (origen instanceof Juego)) {
-            //MUESTRA EN UNA SOLA PESTAÑA EL GANADOR
+           vista.desactivarBotonSeguirJugando();
            Jugador ganador = fachada.getGanador(this.juego);
-           String figuraGanadora = fachada.getNombreFigura(ganador);
-           generarConDatos(jugador); 
-           vista.mostrarEstadoJuego("EL JUGADOR: " + ganador.getNombre() + " GANÓ CON LA FIGURA: " + figuraGanadora);
+           String figuraGanadora = fachada.getNombreFiguraGanadora(ganador);
+           vista.mostrarEstadoJuego("EL JUGADOR: " + ganador.getNombre() + " GANÓ");
+           if(figuraGanadora!=null) {
+               generarConDatos(jugador); 
+               vista.mostrarEstadoJuego("EL JUGADOR: " + ganador.getNombre() + " GANÓ CON LA FIGURA: " + figuraGanadora);
+           }
+           this.saldoActual = jugador.getSaldo();
+           this.mostrarDatos();
+           fachada.eliminarJuego(juego);
+        }
+        
+        if(evento == Evento.ABANDONO && (origen instanceof Juego)) {
+            this.mostrarDatos();
         }
     }
     
@@ -112,13 +123,18 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
                             fachada.getDemasJugadores(this.juego,this.jugador),
                             this.numeroActual.getNumero(),
                             fachada.getMontoPozoJuego(this.juego),
-                            jugador.getSaldo(),
+                            this.saldoActual,
                             historicoNumeros);
     }
 
     public void seguirJugando() {
         vista.mostrarEstadoJuego("Esperando...");
         fachada.seguirJugando(juego, jugador);
+    }
+
+    public void abandonar() {
+        fachada.abandonar(juego, jugador);
+        vista.cerrar();
     }
    
 

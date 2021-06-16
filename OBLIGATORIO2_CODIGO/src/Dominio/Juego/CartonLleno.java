@@ -2,8 +2,8 @@ package Dominio.Juego;
 
 public class CartonLleno extends TipoFigura {
 
-    public CartonLleno(String nombre) {
-        super(nombre);
+    public CartonLleno(String nombre, double valor) {
+        super(nombre, valor);
     }
  
     @Override
