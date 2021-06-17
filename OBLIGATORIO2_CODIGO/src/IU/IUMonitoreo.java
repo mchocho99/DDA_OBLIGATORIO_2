@@ -57,7 +57,7 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
         labelEstado = new javax.swing.JLabel();
         labelCantBolillas = new javax.swing.JLabel();
         labelGanador = new javax.swing.JLabel();
-        labelJugador = new javax.swing.JLabel();
+        txt_NombreJugadorMarcoNumero = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,6 +68,7 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
         });
         jScrollPane1.setViewportView(lst_Juegos);
 
+        lst_JugadoresDelJuego.setFixedCellWidth(40);
         lst_JugadoresDelJuego.setMinimumSize(new java.awt.Dimension(50, 50));
         jScrollPane2.setViewportView(lst_JugadoresDelJuego);
 
@@ -93,8 +94,7 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
                 .addContainerGap(225, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelContenedorNumeros, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(80, 80, 80)
@@ -123,7 +123,8 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_NumeroJuego)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelContenedorNumeros))
                 .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
@@ -155,9 +156,14 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelContenedorNumeros, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelContenedorNumeros, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        txt_NombreJugadorMarcoNumero.setEditable(false);
+        txt_NombreJugadorMarcoNumero.setBackground(new java.awt.Color(204, 204, 204));
+        txt_NombreJugadorMarcoNumero.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txt_NombreJugadorMarcoNumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,10 +172,11 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txt_NombreJugadorMarcoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,9 +185,9 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(txt_NombreJugadorMarcoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -244,7 +251,6 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
     private javax.swing.JLabel labelCantBolillas;
     private javax.swing.JLabel labelEstado;
     private javax.swing.JLabel labelGanador;
-    private javax.swing.JLabel labelJugador;
     private javax.swing.JLabel labelNumero;
     private javax.swing.JList lst_Juegos;
     private javax.swing.JList lst_JugadoresDelJuego;
@@ -252,6 +258,7 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
     private javax.swing.JLabel txt_CantBolillas;
     private javax.swing.JLabel txt_Estado;
     private javax.swing.JLabel txt_Ganador;
+    private javax.swing.JTextField txt_NombreJugadorMarcoNumero;
     private javax.swing.JLabel txt_NumeroJuego;
     // End of variables declaration//GEN-END:variables
 
@@ -292,6 +299,6 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
 
     @Override
     public void mostrarNombreQueMarco(String nombreJugador) {
-        this.labelJugador.setText(nombreJugador);
+        this.txt_NombreJugadorMarcoNumero.setText(nombreJugador);
     }
 }

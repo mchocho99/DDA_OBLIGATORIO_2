@@ -9,7 +9,8 @@ public class ListaBotonCasilla extends JPanel{
 
     public ListaBotonCasilla() {
         this.setLayout(gridLayout);
-        gridLayout.setRows(4);
+        gridLayout.setRows(10);
+        gridLayout.setColumns(6);
     } 
     
     public void cargar(Object[] datos, MarcadorBotonCasilla mc) {

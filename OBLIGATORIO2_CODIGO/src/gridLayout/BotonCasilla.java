@@ -35,6 +35,8 @@ public class BotonCasilla extends JButton implements ActionListener {
         if(marcador instanceof ControladorMonitoreo) {
             if(((Numero)dato).getMarcado()) {
                 marcador.click(dato);
+            }else {
+                marcador.click(null);
             }
         }
     }

@@ -81,6 +81,10 @@ public class ControladorMonitoreo implements Observador, MarcadorBotonCasilla {
 
     @Override
     public void click(Object dato) {
-        vista.mostrarNombreQueMarco(((Numero)dato).getNombreJugador());
+        if(dato == null) {
+            vista.mostrarNombreQueMarco("Este numero no salió sorteado aun!");
+        }else {
+            vista.mostrarNombreQueMarco(((Numero)dato).getNombreJugador());
+        }
     }
 }
