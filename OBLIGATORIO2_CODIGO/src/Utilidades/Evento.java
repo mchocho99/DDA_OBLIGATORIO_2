@@ -6,6 +6,5 @@ public enum Evento {
     SORTEO,
     GANADOR,
     ABANDONO,
-    ELIMINAR_JUEGO,
     ACTUALIZAR_LISTA_JUEGOS
 }

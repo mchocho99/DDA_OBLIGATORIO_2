@@ -27,6 +27,9 @@ public class ControladorMonitoreo implements Observador, MarcadorBotonCasilla {
     public void actualizar(Object evento, Observable origen) {
         if(evento == Evento.ACTUALIZAR_LISTA_JUEGOS && (origen instanceof Fachada)) {
             vista.mostrarJuegos(fachada.getJuegos());
+            if(this.juegoSeleccionado!=null) {
+                vista.mostrarJugadores(this.juegoSeleccionado.getTodosLosJugadores());
+            }
         }
         if(evento == Evento.SORTEO && (origen instanceof Fachada)) {
             if(this.juegoSeleccionado != null) {

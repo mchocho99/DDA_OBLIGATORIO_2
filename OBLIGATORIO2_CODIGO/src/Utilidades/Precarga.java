@@ -29,7 +29,7 @@ public class Precarga {
         
         /*CONFIGURACION*/
         Configuracion config = Configuracion.getInstancia();
-        config.setearConfig(3, 3, 3, 2, 100, figurasHabilitadas);
+        config.setearConfig(3, 3, 3, 3, 300, figurasHabilitadas);
         Fachada fachada = Fachada.getInstancia();
         
         /*USUARIOS*/
@@ -40,7 +40,7 @@ public class Precarga {
         Jugador jugador2 = new Jugador(40000, "12345670", "jugador123", "jugador2");
         Jugador jugador3 = new Jugador(50000, "12345671", "jugador123", "jugador3");
         Jugador jugador4 = new Jugador(60000, "12345672", "jugador123", "jugador4");
-        Jugador jugador5 = new Jugador(100, "12345673", "jugador123", "jugador5");
+        Jugador jugador5 = new Jugador(900, "12345673", "jugador123", "jugador5");
         
         fachada.agregarUsuario(admin1);   
         fachada.agregarUsuario(admin2); 

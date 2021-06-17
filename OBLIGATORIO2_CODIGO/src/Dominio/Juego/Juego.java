@@ -115,8 +115,8 @@ public class Juego extends Observable{
     }
    
 
-    void jugadorPerteneceABingo(Jugador jugador) throws ExcepcionJuego{
-        if (todosLosJugadores.contains(jugador) && this.estado != EstadosJuego.TERMINO) {
+    public void jugadorPerteneceABingo(Jugador jugador) throws ExcepcionJuego{
+        if (this.todosLosJugadores.contains(jugador) && this.estado != EstadosJuego.TERMINO) {
             throw new ExcepcionJuego("El jugador " + jugador.getCedula() + " ya está participando del bingo");
         }
     }
@@ -130,6 +130,7 @@ public class Juego extends Observable{
     }
     
     public void cargarCartones(int filasCarton, int columnasCarton, double valorCarton, Jugador jugador) {
+        this.eliminarCartones(jugador);
         this.setNumerosDelJuego(filasCarton*columnasCarton);
         int cantCartonesJugador = jugador.getCantCartonesSolicitados();
         for (int i = 0; i < cantCartonesJugador; i++) {
@@ -208,7 +209,7 @@ public class Juego extends Observable{
             double montoACobrar = this.cobrar(valorCarton, this.ganador, this.ganador.getExtraFigura());
             this.ganador.cobrar(montoACobrar);
             this.setEstado(EstadosJuego.TERMINO);
-            this.avisarEvento(Evento.GANADOR);           
+            this.avisarEvento(Evento.GANADOR); 
             return true;
         }
         return false;
@@ -292,8 +293,8 @@ public class Juego extends Observable{
                 return true;
             }
         }
-        if(this.activos.isEmpty()) {
-            this.avisarEvento(Evento.ELIMINAR_JUEGO);
+        if(this.activos.isEmpty() && this.estado == EstadosJuego.ACTIVO) {
+            this.setEstado(EstadosJuego.TERMINO);
         }
         return false;
     }
@@ -327,10 +328,8 @@ public class Juego extends Observable{
         this.ganador = jugador;
     }  
 
-    void eliminarCartones() {
-        for (Jugador jugador : todosLosJugadores) {
-            jugador.eliminarCartones();
-        }
+    public void eliminarCartones(Jugador jugador) {
+        jugador.eliminarCartones();
     }
 
     public String getNombreGanador() {
@@ -343,6 +342,4 @@ public class Juego extends Observable{
     public int getCantBolillasSorteadas() {
         return this.numerosQueSalieron.size();
     }
-    
-    
 }

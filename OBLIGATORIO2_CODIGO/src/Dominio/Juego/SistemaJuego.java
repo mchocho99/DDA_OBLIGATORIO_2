@@ -41,8 +41,6 @@ public class SistemaJuego {
     }
 
     public Juego agregarJugadorAJuego(Jugador jugador){
-        //salir a buscar el primer juego que este en espera que entre.
-        //Si no hay uno en espera, se crea un Juego nuevo y se pone en espera.
         Juego juegoABuscar = null;
         int largo = this.juegos.size();
         int contador = 0;
@@ -51,6 +49,7 @@ public class SistemaJuego {
             Juego juegoActual = this.juegos.get(contador);
             if (juegoActual.estaEnEspera()) {
                 juegoActual.setJugador(jugador);
+                Fachada.getInstancia().avisarEvento(Evento.ACTUALIZAR_LISTA_JUEGOS);
                 juegoABuscar = juegoActual; 
                 pertenece = true;
             }
@@ -106,6 +105,7 @@ public class SistemaJuego {
         boolean hayGanador = juego.verificarGanador(config.getValorCarton(), jugador, config.getFilasCarton(), config.getColumnasCarton());
         if(hayGanador) {
             Fachada.getInstancia().avisarEvento(Evento.GANADOR);
+            Fachada.getInstancia().avisarEvento(Evento.ACTUALIZAR_LISTA_JUEGOS);
         }
         return hayGanador;
     }
@@ -146,19 +146,15 @@ public class SistemaJuego {
             if(juego.tieneJugadores()) {
                 boolean gano = juego.abandonar(config.getValorCarton(), jugador);
                 if(gano) {
-                    Fachada.getInstancia().avisarEvento(Evento.GANADOR);
+                    Fachada.getInstancia().avisarEvento(Evento.GANADOR);  
                 }
+                Fachada.getInstancia().avisarEvento(Evento.ACTUALIZAR_LISTA_JUEGOS);
             }
         }
     }
 
     public double getMontoADebitar(Jugador jugador, double extra) {
         return jugador.getMontoADebitar(config.getValorCarton(), extra);
-    }
-
-    public void eliminarJuego(Juego juego) {     
-        juego.eliminarCartones();
-        Fachada.getInstancia().avisarEvento(Evento.ACTUALIZAR_LISTA_JUEGOS);
     }
 
     public String getNombreFiguraGanadora(Jugador ganador) {

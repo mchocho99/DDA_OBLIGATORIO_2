@@ -2,19 +2,15 @@ package Controlador;
 
 import Dominio.Fachada.Fachada;
 import Dominio.Juego.Carton;
-import Dominio.Juego.EstadosJuego;
-import Dominio.Juego.Figura;
 import Dominio.Juego.Juego;
 import Dominio.Juego.Numero;
 import Dominio.Usuarios.Jugador;
-import Excepciones.ExcepcionJuego;
 import Utilidades.Evento;
 import Utilidades.Observable;
 import Utilidades.Observador;
 import gridLayout.ListaPaneles;
 import gridLayout.MarcadorCasilla;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class ControladorJuego implements MarcadorCasilla, Observador {
 
@@ -123,11 +119,6 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
                 this.mostrarDatos();
             }
         }
-        
-        if(evento == Evento.ELIMINAR_JUEGO && (origen instanceof Juego)) {
-            fachada.eliminarJuego(juego);
-            this.juego = null;
-        }
     }
     
     private void mostrarDatos() {
@@ -135,7 +126,7 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
         vista.mostrarDatos(this.juego.getFigurasHabilitadas(),
                             fachada.getDemasJugadores(this.juego,this.jugador),
                             this.numeroActual.getNumero(),
-                            fachada.getMontoPozoJuego(this.juego),
+                            fachada.getMontoPozoJuego(juego),
                             this.saldoActual,
                             historicoNumeros);
     }

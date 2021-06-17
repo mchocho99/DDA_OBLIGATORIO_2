@@ -205,7 +205,8 @@ public class IULoginJugador extends javax.swing.JDialog implements VistaLoginUsu
 
     @Override
     public void mostrarProximaInterfaz(Usuario usuario) {
-        IUJuego ventanaJuego = new IUJuego(null, false, (Jugador)usuario);
+        Jugador jugador = (Jugador)usuario;
+        IUJuego ventanaJuego = new IUJuego(null, false, jugador);
         ventanaJuego.setVisible(true);
         ventanaJuego.setLocationRelativeTo(this);
     }

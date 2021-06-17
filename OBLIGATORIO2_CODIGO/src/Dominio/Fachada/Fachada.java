@@ -115,10 +115,6 @@ public class Fachada extends Observable{
         return sJuego.getMontoADebitar(jugador, extra);
     }
 
-    public void eliminarJuego(Juego juego) {
-        sJuego.eliminarJuego(juego);
-    }
-
     public String getNombreFiguraGanadora(Jugador ganador) {
         return sJuego.getNombreFiguraGanadora(ganador);
     }
