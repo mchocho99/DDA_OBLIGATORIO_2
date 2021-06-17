@@ -11,7 +11,7 @@ import Dominio.Juego.EstadosJuego;
 import Dominio.Juego.Juego;
 import Dominio.Usuarios.Jugador;
 import gridLayout.Casilla;
-import gridLayout.ListaCasilla;
+import gridLayout.ListaBotonCasilla;
 import java.awt.Component;
 import java.util.List;
 
@@ -261,24 +261,37 @@ public class IUMonitoreo extends javax.swing.JDialog implements VistaMonitoreo {
     }
 
     @Override
-    public void mostrarDatosEstaticos(int numeroJuego, int cantidadBolillas) {
-        this.labelNumero.setText(Integer.toString(numeroJuego));
-        this.labelCantBolillas.setText(Integer.toString(cantidadBolillas));
-    }
-
-    @Override
-    public void mostrarDatosDinamicos(EstadosJuego estado, String ganador) {
-        this.labelEstado.setText(estado.toString());
-        this.labelGanador.setText(ganador);
-    }
-
-    @Override
     public void mostrarJugadores(List<Jugador> jugadores) {
         this.lst_JugadoresDelJuego.setListData(jugadores.toArray());
     }
 
     @Override
-    public void mostrarNumerosDelJuego(ListaCasilla casillas) {
+    public void mostrarNumerosDelJuego(ListaBotonCasilla casillas) {
         this.panelContenedorNumeros.setViewportView(casillas);
+    }
+
+    @Override
+    public void mostrarNumeroJuego(int numeroJuego) {
+        this.labelNumero.setText(Integer.toString(numeroJuego));
+    }
+
+    @Override
+    public void mostrarGanador(String ganador) {
+        this.labelGanador.setText(ganador);
+    }
+
+    @Override
+    public void mostrarEstadoJuego(EstadosJuego estado) {
+        this.labelEstado.setText(estado.toString());
+    }
+
+    @Override
+    public void mostrarCantBolillasSorteadas(int cantidadBolillas) {
+        this.labelCantBolillas.setText(Integer.toString(cantidadBolillas));
+    }
+
+    @Override
+    public void mostrarNombreQueMarco(String nombreJugador) {
+        this.labelJugador.setText(nombreJugador);
     }
 }

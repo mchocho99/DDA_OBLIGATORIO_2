@@ -210,4 +210,9 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
     public void desactivarBotonSeguirJugando() {
         this.btn_SeguirJugando.setEnabled(false);
     }
+
+    @Override
+    public void mostrarNumero(Object dato) {
+        JOptionPane.showMessageDialog(this, dato);
+    }
 }

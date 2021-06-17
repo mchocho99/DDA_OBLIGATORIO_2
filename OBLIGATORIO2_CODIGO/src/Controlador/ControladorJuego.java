@@ -149,6 +149,4 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
         fachada.abandonar(juego, jugador);
         vista.cerrar();
     }
-   
-
  }

@@ -21,11 +21,11 @@ public class Precarga {
         Diagonal diagonal = new Diagonal("Diagonal", 0.5);
         Perimetro perimetro = new Perimetro("Perímetro", 1.0);
         CartonLleno cartonLleno = new CartonLleno("Cartón Lleno", 2.0);
-        TipoFigura[] figurasHabilitadas = new TipoFigura[3];
+        TipoFigura[] figurasHabilitadas = new TipoFigura[4];
         figurasHabilitadas[0] = linea;
-        //figurasHabilitadas[1] = diagonal;
-        figurasHabilitadas[1] = perimetro;
-        figurasHabilitadas[2] = cartonLleno;
+        figurasHabilitadas[1] = diagonal;
+        figurasHabilitadas[2] = perimetro;
+        figurasHabilitadas[3] = cartonLleno;
         
         /*CONFIGURACION*/
         Configuracion config = Configuracion.getInstancia();
@@ -34,19 +34,22 @@ public class Precarga {
         
         /*USUARIOS*/
         Administrador admin1 = new Administrador("admin1@gmail.com", "12345678", "admin123", "Admin1");
+        Administrador admin2 = new Administrador("admin2@gmail.com", "12345675", "admin123", "Admin2");
 
         Jugador jugador1 = new Jugador(30000, "12345679", "jugador123", "jugador1");
         Jugador jugador2 = new Jugador(40000, "12345670", "jugador123", "jugador2");
         Jugador jugador3 = new Jugador(50000, "12345671", "jugador123", "jugador3");
         Jugador jugador4 = new Jugador(60000, "12345672", "jugador123", "jugador4");
-        Jugador jugador5 = new Jugador(1000, "12345673", "jugador123", "jugador5");
+        Jugador jugador5 = new Jugador(100, "12345673", "jugador123", "jugador5");
         
         fachada.agregarUsuario(admin1);   
+        fachada.agregarUsuario(admin2); 
         fachada.agregarUsuario(jugador1);
         fachada.agregarUsuario(jugador2);
         
         fachada.agregarUsuario(jugador3);
         fachada.agregarUsuario(jugador4);
+        fachada.agregarUsuario(jugador5);
         
 //        Carton carton = new Carton(3, 4, 100, null);
 //        carton.getMatrizCarton()[0][0].setMarcado(true);

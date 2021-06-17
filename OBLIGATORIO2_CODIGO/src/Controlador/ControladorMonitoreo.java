@@ -1,23 +1,21 @@
 package Controlador;
 
 import Dominio.Fachada.Fachada;
+import Dominio.Juego.EstadosJuego;
 import Dominio.Juego.Juego;
 import Dominio.Juego.Numero;
-import Dominio.Usuarios.Jugador;
-import IU.IUMonitoreo;
 import Utilidades.Evento;
 import Utilidades.Observable;
 import Utilidades.Observador;
-import gridLayout.Casilla;
-import gridLayout.ListaCasilla;
-import gridLayout.MarcadorCasilla;
-import java.util.ArrayList;
+import gridLayout.ListaBotonCasilla;
+import gridLayout.MarcadorBotonCasilla;
 import java.util.List;
 
-public class ControladorMonitoreo implements Observador, MarcadorCasilla {
+public class ControladorMonitoreo implements Observador, MarcadorBotonCasilla {
     
     private VistaMonitoreo vista;
     private Fachada fachada = Fachada.getInstancia();
+    private Juego juegoSeleccionado = null;
 
     public ControladorMonitoreo(VistaMonitoreo vista) {
         this.vista = vista;
@@ -29,19 +27,46 @@ public class ControladorMonitoreo implements Observador, MarcadorCasilla {
     public void actualizar(Object evento, Observable origen) {
         if(evento == Evento.ACTUALIZAR_LISTA_JUEGOS && (origen instanceof Fachada)) {
             vista.mostrarJuegos(fachada.getJuegos());
-            //FALTA ACTUALIZAR LA CANTIDAD DE BOLILLAS SORTEADAS
+        }
+        if(evento == Evento.SORTEO && (origen instanceof Fachada)) {
+            if(this.juegoSeleccionado != null) {
+                vista.mostrarCantBolillasSorteadas(this.juegoSeleccionado.getCantBolillasSorteadas());
+            }
+        }
+        if(evento == Evento.MARCO && (origen instanceof Fachada)) {
+            if(this.juegoSeleccionado != null) {
+                this.marcarEnBolillero();
+            }
+        }
+        if(evento == Evento.GANADOR && (origen instanceof Fachada)) {
+            if(this.juegoSeleccionado != null) {
+                String ganador = this.juegoSeleccionado.getNombreGanador();
+                vista.mostrarJuegos(fachada.getJuegos());
+                vista.mostrarEstadoJuego(this.juegoSeleccionado.getEstado());
+                vista.mostrarGanador(ganador);
+            }
         }
     }
 
-    public void mostrarDatos(Juego juego) {      
-        vista.mostrarDatosEstaticos(juego.getNumero(),juego.getNumerosQueSalieron().size());//ROMPE EXPERTO
+    public void mostrarDatos(Juego juego) {    
         String ganador = juego.getNombreGanador();
-        vista.mostrarDatosDinamicos(juego.getEstado() ,ganador);
+        int cantBolillas = juego.getNumerosQueSalieron().size();
+        EstadosJuego estado = juego.getEstado();
         vista.mostrarJugadores(juego.getTodosLosJugadores());
-        List<Numero> numeros = juego.getNumerosDelJuego();
-        ListaCasilla lc = new ListaCasilla();
+        vista.mostrarNumeroJuego(juego.getNumero());
+        vista.mostrarEstadoJuego(estado);
+        vista.mostrarGanador(ganador);
+        vista.mostrarCantBolillasSorteadas(cantBolillas);
+        this.juegoSeleccionado = juego;
+        this.marcarEnBolillero();
+    }
+    
+    public void marcarEnBolillero() {
+        List<Numero> numeros = juegoSeleccionado.getNumerosDelJuego();
+        ListaBotonCasilla lc = new ListaBotonCasilla();
         lc.cargar(numeros.toArray(), this);
         vista.mostrarNumerosDelJuego(lc);
+        lc.marcar();
     }
 
     @Override
@@ -52,5 +77,10 @@ public class ControladorMonitoreo implements Observador, MarcadorCasilla {
     @Override
     public String getTexto(Object dato) {
         return ((Numero)dato).getNumero() + "";
+    }
+
+    @Override
+    public void click(Object dato) {
+        vista.mostrarNombreQueMarco(((Numero)dato).getNombreJugador());
     }
 }

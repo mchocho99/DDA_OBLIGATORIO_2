@@ -183,9 +183,22 @@ public class Juego extends Observable{
 
     public boolean marcarNumero(Jugador jugador, Numero numeroSorteado) {
         if(this.activos.contains(jugador)) {
-            return jugador.marcarNumero(numeroSorteado);
+            boolean marco = jugador.marcarNumero(numeroSorteado);
+            if(marco) {
+                this.marcarNumeroSorteadoEnTodosLosNumeros(jugador, numeroSorteado);
+            }
+            return marco;
         }
         return false;
+    }
+    
+    public void marcarNumeroSorteadoEnTodosLosNumeros(Jugador jugador, Numero numero) {
+        for (Numero unN : this.numerosDelJuego) {
+            if(unN.equals(numero)) {
+                unN.setMarcado(true);
+                unN.setJugador(jugador);
+            }
+        }
     }
 
     public boolean verificarGanador(double valorCarton, Jugador jugador, int filas, int columnas) {
@@ -236,7 +249,7 @@ public class Juego extends Observable{
         return historicoNumeros;
     }
 
-    public void seguirJugando(Jugador jugador) {
+    public boolean seguirJugando(Jugador jugador) {
         jugador.setListo(true);
         int listos = 0;
         int largoActivos = this.activos.size();
@@ -249,7 +262,9 @@ public class Juego extends Observable{
             Numero numeroSorteado = this.sortearNumero();
             this.volverJugadoresANoListo();
             this.avisarEvento(Evento.SORTEO);
+            return true;
         }
+        return false;
     }
 
     private void volverJugadoresANoListo() {
@@ -263,7 +278,7 @@ public class Juego extends Observable{
         return  "N° " + this.numero + " Estado " + this.estado.toString() + " Jugadores: " + this.todosLosJugadores.size();
     }
 
-    public void abandonar(double valorCarton, Jugador jugador) {
+    public boolean abandonar(double valorCarton, Jugador jugador) {
         this.activos.remove(jugador);
         this.avisarEvento(Evento.ABANDONO);
         if(this.activos.size() == 1) {
@@ -274,11 +289,13 @@ public class Juego extends Observable{
                 this.activos.clear();              
                 this.setEstado(EstadosJuego.TERMINO);
                 this.avisarEvento(Evento.GANADOR);
+                return true;
             }
         }
         if(this.activos.isEmpty()) {
             this.avisarEvento(Evento.ELIMINAR_JUEGO);
         }
+        return false;
     }
     
     public double cobrar(double valorCarton, Jugador jugador, double extra) {
@@ -321,6 +338,10 @@ public class Juego extends Observable{
             return this.ganador.getNombre();
         }
         return "";
+    }
+
+    public int getCantBolillasSorteadas() {
+        return this.numerosQueSalieron.size();
     }
     
     

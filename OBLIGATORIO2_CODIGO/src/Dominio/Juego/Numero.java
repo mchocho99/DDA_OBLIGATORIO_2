@@ -46,6 +46,10 @@ public class Numero {
         this.jugador = jugador;
     }
 
+    public String getNombreJugador() {
+        return this.jugador.getNombre();
+    }
+    
     @Override
     public boolean equals(Object obj) {
         return ((Numero)obj).getNumero() == this.numero;

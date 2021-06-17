@@ -1,8 +1,11 @@
 package gridLayout;
 
+import Controlador.ControladorMonitoreo;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JTextField;
 
 public class Casilla extends JTextField {
@@ -26,6 +29,4 @@ public class Casilla extends JTextField {
             setForeground(Color.WHITE);
         }
     }
-
-    
 }

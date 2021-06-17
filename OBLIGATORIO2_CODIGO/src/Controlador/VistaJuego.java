@@ -16,4 +16,5 @@ public interface VistaJuego {
             String historicoNumeros);
     public void cerrar();
     public void desactivarBotonSeguirJugando();
+    public void mostrarNumero(Object dato);
 }

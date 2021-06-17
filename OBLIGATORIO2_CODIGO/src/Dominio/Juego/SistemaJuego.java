@@ -95,11 +95,19 @@ public class SistemaJuego {
     }
 
     public boolean marcarNumero(Juego juego, Jugador jugador, Numero numeroSorteado) {
-        return juego.marcarNumero(jugador, numeroSorteado);
+        boolean marco = juego.marcarNumero(jugador, numeroSorteado);
+        if(marco) {
+            Fachada.getInstancia().avisarEvento(Evento.MARCO);
+        }
+        return marco;
     }
 
     public boolean verificarGanador(Juego juego, Jugador jugador) {
-        return juego.verificarGanador(config.getValorCarton(), jugador, config.getFilasCarton(), config.getColumnasCarton());
+        boolean hayGanador = juego.verificarGanador(config.getValorCarton(), jugador, config.getFilasCarton(), config.getColumnasCarton());
+        if(hayGanador) {
+            Fachada.getInstancia().avisarEvento(Evento.GANADOR);
+        }
+        return hayGanador;
     }
 
     public List<Jugador> getDemasJugadores(Juego juego,Jugador jugador) {
@@ -119,7 +127,10 @@ public class SistemaJuego {
     }
 
     public void seguirJugando(Juego juego, Jugador jugador) {
-        juego.seguirJugando(jugador);
+        boolean sorteo = juego.seguirJugando(jugador);
+        if(sorteo) {
+            Fachada.getInstancia().avisarEvento(Evento.SORTEO);
+        }
     }
 
     public Jugador getGanador(Juego juego) {
@@ -133,7 +144,10 @@ public class SistemaJuego {
     public void abandonar(Juego juego, Jugador jugador) {
         if (juego != null) {
             if(juego.tieneJugadores()) {
-                juego.abandonar(config.getValorCarton(), jugador);
+                boolean gano = juego.abandonar(config.getValorCarton(), jugador);
+                if(gano) {
+                    Fachada.getInstancia().avisarEvento(Evento.GANADOR);
+                }
             }
         }
     }
