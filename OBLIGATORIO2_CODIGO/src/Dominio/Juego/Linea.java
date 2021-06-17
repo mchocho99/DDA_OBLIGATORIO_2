@@ -9,8 +9,8 @@ public class Linea extends TipoFigura {
     @Override
     public boolean completo(Numero[][] matrizCarton, int filas, int columnas) {
         boolean[] filaMarcada = new boolean[filas];
-        for (int i = 0; i < columnas; i++) {
-            for (int j = 0; j < filas; j++) {
+        /*for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
                 //recorriendo las lineas horizontales.
                 if(matrizCarton[i][j].getMarcado()) {
                     filaMarcada[j] = true;
@@ -21,26 +21,26 @@ public class Linea extends TipoFigura {
             if(this.lineaMarcada(filaMarcada)) {
                 return true;
             }
-        } 
+        } */
         
         //Recorrer el i y que el j no sume hasta que i llegue al final.
         int fila = 0;
         int columna = 0;
         boolean[] columnaMarcada = new boolean[columnas];
         while (fila!=filas && columna!=columnas) {            
-            if(matrizCarton[columna][fila].getMarcado()) {
-                columnaMarcada[columna] = true;
+            if(matrizCarton[fila][columna].getMarcado()) {
+                columnaMarcada[fila] = true;
             }else {
-                columnaMarcada[columna] = false;
+                columnaMarcada[fila] = false;
             }
-            if(columna==columnas -1) {
-                fila++;
-                columna = 0;
+            if(fila==filas -1) {
+                columna++;
+                fila = 0;
                 if(this.lineaMarcada(columnaMarcada)) {
                     return true;
                 }
             }else {
-                columna++;
+                fila++;
             } 
         }
         return false;

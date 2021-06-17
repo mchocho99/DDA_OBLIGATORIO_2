@@ -21,6 +21,7 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
     private VistaJuego vista;
     private static Fachada fachada = Fachada.getInstancia();
     private Jugador jugador;
+    private Jugador ganador = null;
     private double saldoActual;
     private Juego juego;
     private Numero numeroActual;
@@ -57,8 +58,8 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
         Object[] datos = new Object[filas * columnas];
         int contador = 0;
         Numero[][] matrizCarton = carton.getMatrizCarton();
-        for (int i = 0; i < columnas; i++) {
-            for (int j = 0; j < filas; j++) {
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
                 datos[contador] = matrizCarton[i][j];
                 contador++;
             }
@@ -81,42 +82,54 @@ public class ControladorJuego implements MarcadorCasilla, Observador {
         if(evento == Evento.JUEGO_ACTIVO && (origen instanceof Juego)) {
             fachada.cargarCartones(juego, jugador);          
             generarConDatos(jugador);
+            vista.mostrarEstadoJuego("Esperando sorteo...");
         }     
         if(evento == Evento.SORTEO && (origen instanceof Juego)) {
-            this.numeroActual = fachada.getNumeroActual(this.juego);
-            boolean marco = fachada.marcarNumero(this.juego, this.jugador, this.numeroActual);
-            boolean gano = false;
-            if (marco) {
-                gano = fachada.verificarGanador(this.juego, this.jugador);
-                if (!gano) {
-                    vista.mostrarEstadoJuego("ANOTÓ!");   
+            if (this.ganador == null) {
+                vista.mostrarEstadoJuego("NO ANOTÓ!");
+                this.numeroActual = fachada.getNumeroActual(this.juego);
+                boolean marco = fachada.marcarNumero(this.juego, this.jugador, this.numeroActual);
+                boolean gano = false;
+                if (marco) {
+                    gano = fachada.verificarGanador(this.juego, this.jugador);
+                    if (!gano) {
+                        vista.mostrarEstadoJuego("ANOTÓ!");   
+                    }
                 }
-            }
-            if (!gano) {
-               generarConDatos(jugador); 
-               mostrarDatos();
+                if (!gano) {
+                    generarConDatos(jugador); 
+                    mostrarDatos();
+                }
+            }else{
+                generarConDatos(jugador); 
+                mostrarDatos();
             }
         }
         if(evento == Evento.GANADOR && (origen instanceof Juego)) {
            vista.desactivarBotonSeguirJugando();
-           Jugador ganador = fachada.getGanador(this.juego);
-           String figuraGanadora = fachada.getNombreFiguraGanadora(ganador);
-           vista.mostrarEstadoJuego("EL JUGADOR: " + ganador.getNombre() + " GANÓ");
+           this.ganador = fachada.getGanador(this.juego);
+           String figuraGanadora = fachada.getNombreFiguraGanadora(this.ganador);
+           vista.mostrarEstadoJuego("EL JUGADOR: " + this.ganador.getNombre() + " GANÓ");
            if(figuraGanadora!=null) {
                generarConDatos(jugador); 
-               vista.mostrarEstadoJuego("EL JUGADOR: " + ganador.getNombre() + " GANÓ CON LA FIGURA: " + figuraGanadora);
+               vista.mostrarEstadoJuego("EL JUGADOR: " + this.ganador.getNombre() + " GANÓ CON LA FIGURA: " + figuraGanadora);
            }
            this.saldoActual = jugador.getSaldo();
            this.mostrarDatos();
-           fachada.eliminarJuego(juego);
         }
         
         if(evento == Evento.ABANDONO && (origen instanceof Juego)) {
-            this.mostrarDatos();
+            if (this.juego.tieneJugadoresActivos()) {
+                this.mostrarDatos();
+            }
+        }
+        
+        if(evento == Evento.ELIMINAR_JUEGO && (origen instanceof Juego)) {
+            fachada.eliminarJuego(juego);
+            this.juego = null;
         }
     }
     
-
     private void mostrarDatos() {
         String historicoNumeros = fachada.getHistoricoNumeros(juego);
         vista.mostrarDatos(this.juego.getFigurasHabilitadas(),

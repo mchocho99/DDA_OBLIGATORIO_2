@@ -21,15 +21,15 @@ public class Precarga {
         Diagonal diagonal = new Diagonal("Diagonal", 0.5);
         Perimetro perimetro = new Perimetro("Perímetro", 1.0);
         CartonLleno cartonLleno = new CartonLleno("Cartón Lleno", 2.0);
-        TipoFigura[] figurasHabilitadas = new TipoFigura[4];
+        TipoFigura[] figurasHabilitadas = new TipoFigura[3];
         figurasHabilitadas[0] = linea;
-        figurasHabilitadas[1] = diagonal;
-        figurasHabilitadas[2] = perimetro;
-        figurasHabilitadas[3] = cartonLleno;
+        //figurasHabilitadas[1] = diagonal;
+        figurasHabilitadas[1] = perimetro;
+        figurasHabilitadas[2] = cartonLleno;
         
         /*CONFIGURACION*/
         Configuracion config = Configuracion.getInstancia();
-        config.setearConfig(3, 3, 3, 2, 10, figurasHabilitadas);
+        config.setearConfig(3, 3, 3, 2, 100, figurasHabilitadas);
         Fachada fachada = Fachada.getInstancia();
         
         /*USUARIOS*/

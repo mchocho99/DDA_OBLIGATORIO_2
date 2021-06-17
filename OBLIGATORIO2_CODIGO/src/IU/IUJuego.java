@@ -147,7 +147,6 @@ public class IUJuego extends javax.swing.JDialog implements VistaJuego {
 
     private void btn_AbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbandonarActionPerformed
         controlador.abandonar();
-        this.dispose();
     }//GEN-LAST:event_btn_AbandonarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

@@ -10,9 +10,10 @@ import Dominio.Usuarios.SistemaUsuario;
 import Dominio.Usuarios.Usuario;
 import Excepciones.ExcepcionJuego;
 import Excepciones.ExcepcionUsuario;
+import Utilidades.Observable;
 import java.util.List;
 
-public class Fachada {
+public class Fachada extends Observable{
     private static Fachada instancia;
     
     public static Fachada getInstancia(){

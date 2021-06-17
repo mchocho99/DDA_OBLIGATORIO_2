@@ -98,6 +98,7 @@ public class Juego extends Observable{
             for (int i = 1; i <= cantNumeros; i++) {
                 this.numerosDelJuego.add(new Numero(i, false));
             }
+            this.setCantNumerosEnJuego(this.numerosDelJuego.size());
         }
     }
 
@@ -115,7 +116,7 @@ public class Juego extends Observable{
    
 
     void jugadorPerteneceABingo(Jugador jugador) throws ExcepcionJuego{
-        if (todosLosJugadores.contains(jugador)) {
+        if (todosLosJugadores.contains(jugador) && this.estado != EstadosJuego.TERMINO) {
             throw new ExcepcionJuego("El jugador " + jugador.getCedula() + " ya está participando del bingo");
         }
     }
@@ -151,16 +152,18 @@ public class Juego extends Observable{
         }
     }
 
-    public void listoParaEmpezar() {
+    public boolean listoParaEmpezar() {
         if(this.todosLosJugadores.size() == this.cantMaxJugadores) {
             this.setEstado(EstadosJuego.ACTIVO);      
             for (Jugador jug : todosLosJugadores) {
                 this.setJugadorActivo(jug);
             }
-            this.avisarEvento(Evento.JUEGO_ACTIVO);
-            Numero numero = this.sortearNumero();
+            this.avisarEvento(Evento.JUEGO_ACTIVO);           
+            this.sortearNumero();
             this.avisarEvento(Evento.SORTEO);
+            return true;
         }
+        return false;
     }
 
     public Numero sortearNumero() {
@@ -257,7 +260,7 @@ public class Juego extends Observable{
 
     @Override
     public String toString() {
-        return  numero + " - " + estado;
+        return  "N° " + this.numero + " Estado " + this.estado.toString() + " Jugadores: " + this.todosLosJugadores.size();
     }
 
     public void abandonar(double valorCarton, Jugador jugador) {
@@ -273,15 +276,23 @@ public class Juego extends Observable{
                 this.avisarEvento(Evento.GANADOR);
             }
         }
+        if(this.activos.isEmpty()) {
+            this.avisarEvento(Evento.ELIMINAR_JUEGO);
+        }
     }
     
     public double cobrar(double valorCarton, Jugador jugador, double extra) {
         double monto = 0.0;
         for (Jugador unJ : todosLosJugadores) {
             if(unJ!=jugador) {
-                double montoADebitar = unJ.getMontoADebitar(valorCarton, extra);
+                double montoADebitar = 0.0;
+                if(this.activos.contains(unJ)) {
+                    montoADebitar += unJ.getMontoADebitar(valorCarton, extra);
+                }else {
+                    montoADebitar += unJ.getMontoADebitar(valorCarton, 0.0);
+                }
                 monto += montoADebitar;
-                unJ.pagar(montoADebitar);
+                unJ.pagar(montoADebitar);  
             }
         }
         return monto;
@@ -290,10 +301,27 @@ public class Juego extends Observable{
     public boolean tieneJugadores() {
         return this.todosLosJugadores.size() > 0;
     }
+    
+    public boolean tieneJugadoresActivos() {
+        return this.activos.size() > 0;
+    }
 
     private void setGanador(Jugador jugador) {
         this.ganador = jugador;
     }  
+
+    void eliminarCartones() {
+        for (Jugador jugador : todosLosJugadores) {
+            jugador.eliminarCartones();
+        }
+    }
+
+    public String getNombreGanador() {
+        if (this.ganador != null) {
+            return this.ganador.getNombre();
+        }
+        return "";
+    }
     
     
 }

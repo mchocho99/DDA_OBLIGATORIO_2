@@ -1,8 +1,10 @@
 package Dominio.Juego;
 
+import Dominio.Fachada.Fachada;
 import Dominio.Usuarios.Jugador;
 import Excepciones.ExcepcionJuego;
 import Utilidades.Configuracion;
+import Utilidades.Evento;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -74,6 +76,7 @@ public class SistemaJuego {
         juego.setEstado(EstadosJuego.EN_ESPERA);
         this.idJuego++;
         this.juegos.add(juego);
+        Fachada.getInstancia().avisarEvento(Evento.ACTUALIZAR_LISTA_JUEGOS);
         return juego;
     }
 
@@ -82,7 +85,9 @@ public class SistemaJuego {
     }
 
     public void juegoListoParaEmpezar(Juego juego) {
-        juego.listoParaEmpezar();
+        if (juego.listoParaEmpezar()) {
+            Fachada.getInstancia().avisarEvento(Evento.ACTUALIZAR_LISTA_JUEGOS);
+        }
     }
 
     public Numero sortearNumero(Juego juego) {
@@ -126,8 +131,10 @@ public class SistemaJuego {
     }
     
     public void abandonar(Juego juego, Jugador jugador) {
-        if(juego.tieneJugadores()) {
-            juego.abandonar(config.getValorCarton(), jugador);
+        if (juego != null) {
+            if(juego.tieneJugadores()) {
+                juego.abandonar(config.getValorCarton(), jugador);
+            }
         }
     }
 
@@ -135,9 +142,9 @@ public class SistemaJuego {
         return jugador.getMontoADebitar(config.getValorCarton(), extra);
     }
 
-    public void eliminarJuego(Juego juego) {
-        this.juegos.remove(juego);
-        juego = null;
+    public void eliminarJuego(Juego juego) {     
+        juego.eliminarCartones();
+        Fachada.getInstancia().avisarEvento(Evento.ACTUALIZAR_LISTA_JUEGOS);
     }
 
     public String getNombreFiguraGanadora(Jugador ganador) {

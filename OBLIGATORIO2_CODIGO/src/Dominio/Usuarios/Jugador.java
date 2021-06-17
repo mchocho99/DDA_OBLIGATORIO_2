@@ -137,6 +137,10 @@ public class Jugador extends Usuario {
         }
         return null;
     }
+
+    public void eliminarCartones() {
+        this.cartones.clear();
+    }
     
     
 }
